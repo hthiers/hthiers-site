@@ -5,6 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automatización de Procesos con IA para Empresas | Hernán Thiers</title>
     <meta name="description" content="Automatizamos procesos administrativos, documentos y tareas repetitivas utilizando IA y software a medida. Solicita un diagnóstico gratuito.">
+    <link rel="canonical" href="https://thiers.cl/automatizacion-ia/">
+
+    <!-- Open Graph: cómo se ve el enlace al compartirlo en LinkedIn o WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thiers.cl/automatizacion-ia/">
+    <meta property="og:title" content="Automatiza tus procesos administrativos con IA">
+    <meta property="og:description" content="Procesamos documentos, extraemos la información y la conectamos con los sistemas que ya utilizas. Diagnóstico gratuito.">
+    <meta property="og:image" content="https://thiers.cl/automatizacion-ia/og-automatizacion.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_CL">
+    <meta property="og:site_name" content="Thiers.cl">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Automatiza tus procesos administrativos con IA">
+    <meta name="twitter:description" content="Procesamos documentos, extraemos la información y la conectamos con los sistemas que ya utilizas.">
+    <meta name="twitter:image" content="https://thiers.cl/automatizacion-ia/og-automatizacion.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Automatizaci\u00f3n Inteligente de Documentos",
+      "serviceType": "Automatizaci\u00f3n de procesos administrativos con IA",
+      "description": "Automatizaci\u00f3n de procesos administrativos y procesamiento de documentos utilizando IA, APIs y software a medida.",
+      "url": "https://thiers.cl/automatizacion-ia/",
+      "areaServed": { "@type": "Country", "name": "Chile" },
+      "provider": {
+        "@type": "Person",
+        "name": "Hern\u00e1n Thiers",
+        "jobTitle": "Ingeniero inform\u00e1tico",
+        "url": "https://thiers.cl/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "CLP",
+        "price": "490000",
+        "description": "Automatizaci\u00f3n b\u00e1sica de un proceso. Precio inicial orientativo; se confirma tras evaluar el proceso.",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -23,12 +64,22 @@
             padding: 0 24px;
         }
 
-        /* ── Barra superior ── */
+        /* ── Barra superior (fija: el CTA siempre visible) ── */
+        .topbar-outer {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: #0f172aee;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1e293b;
+        }
+
         .topbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 28px 0;
+            padding: 14px 24px;
         }
 
         .back-link {
@@ -460,6 +511,130 @@
             color: #f1f5f9;
         }
 
+        /* ── Antes / Después ── */
+        .ba-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .ba-col {
+            display: flex;
+            flex-direction: column;
+            padding: 24px 22px;
+            background: #1e293b60;
+            border: 1px solid #1e293b;
+            border-radius: 14px;
+        }
+
+        .ba-col.after {
+            border-color: #38bdf860;
+            background: #38bdf80d;
+        }
+
+        .ba-head {
+            font-size: 9pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .ba-col.after .ba-head { color: #38bdf8; }
+
+        .ba-sub {
+            font-size: 9.5pt;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .ba-list { list-style: none; }
+
+        .ba-list li {
+            position: relative;
+            padding: 7px 0 7px 26px;
+            font-size: 10pt;
+            line-height: 1.45;
+            color: #94a3b8;
+        }
+
+        .ba-list li::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 15px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #334155;
+        }
+
+        .ba-col.after .ba-list li { color: #f1f5f9; }
+        .ba-col.after .ba-list li::before { background: #38bdf8; }
+
+        /* La línea que une los pasos hace visible el largo de cada columna */
+        .ba-list li:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 7.5px;
+            top: 21px;
+            bottom: -7px;
+            width: 1px;
+            background: #1e293b;
+        }
+
+        .ba-col.after .ba-list li:not(:last-child)::after { background: #38bdf830; }
+
+        .ba-list li.manual { color: #64748b; }
+
+        /* Debe ganar a `.ba-col.after .ba-list li`, de mayor especificidad */
+        .ba-col.after .ba-list li.review {
+            color: #38bdf8;
+            font-weight: 700;
+        }
+
+        .ba-foot {
+            margin-top: auto;
+            padding-top: 20px;
+            font-size: 9pt;
+            color: #475569;
+            font-style: italic;
+        }
+
+        .ba-quote {
+            margin-top: 28px;
+            font-size: 11.5pt;
+            font-weight: 700;
+            color: #f1f5f9;
+            max-width: 640px;
+            line-height: 1.6;
+        }
+
+        /* ── Primeros casos (prueba social honesta) ── */
+        .early-box {
+            padding: 32px;
+            background: #38bdf80d;
+            border: 1px solid #38bdf830;
+            border-radius: 14px;
+        }
+
+        .early-box h3 {
+            font-size: 15pt;
+            font-weight: 800;
+            color: #f1f5f9;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .early-box p {
+            font-size: 10.5pt;
+            line-height: 1.7;
+            color: #94a3b8;
+            max-width: 620px;
+            margin-bottom: 24px;
+        }
+
         /* ── Precios ── */
         .pricing-grid {
             display: grid;
@@ -534,6 +709,18 @@
 
         .price-card .btn-price:hover { opacity: 0.85; }
 
+        .price-card .offer {
+            padding: 10px 12px;
+            margin-bottom: 14px;
+            background: #38bdf815;
+            border: 1px dashed #38bdf850;
+            border-radius: 8px;
+            font-size: 9pt;
+            line-height: 1.5;
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
         .pricing-note {
             margin-top: 20px;
             font-size: 9pt;
@@ -604,6 +791,14 @@
             color: #475569;
         }
 
+        .footer-note a {
+            color: #64748b;
+            text-decoration: none;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .footer-note a:hover { color: #94a3b8; }
+
         @media (max-width: 780px) {
             .hero { grid-template-columns: 1fr; padding-top: 24px; }
             .hero h1 { font-size: 26pt; }
@@ -612,6 +807,7 @@
             .solution-flow .arrow { transform: rotate(90deg); }
             .pricing-grid { grid-template-columns: 1fr 1fr; }
             .experience-box { flex-direction: column; }
+            .ba-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 480px) {
@@ -621,14 +817,16 @@
 </head>
 <body>
 
-    <div class="wrap">
-
-        <div class="topbar">
+    <div class="topbar-outer">
+        <div class="wrap topbar">
             <a href="/" class="back-link">← Hernán Thiers</a>
-            <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-small">
+            <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso%20%28ref%3A%20topbar%29" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-small" data-ev="cta_whatsapp" data-ev-loc="topbar">
                 Hablar por WhatsApp
             </a>
         </div>
+    </div>
+
+    <div class="wrap">
 
         <!-- ── Hero ── -->
         <div class="hero">
@@ -637,10 +835,10 @@
                 <p class="sub">Reduce el trabajo manual de tu equipo. Procesamos documentos, extraemos información y conectamos tus procesos con los sistemas que ya utilizas.</p>
 
                 <div class="cta-row">
-                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso%20%28ref%3A%20hero%29" target="_blank" rel="noopener noreferrer" class="btn-primary" data-ev="cta_whatsapp" data-ev-loc="hero">
                         Solicita un diagnóstico gratuito
                     </a>
-                    <a href="#solucion" class="btn-secondary">Ver cómo funciona</a>
+                    <a href="#antes-despues" class="btn-secondary" data-ev="ver_como_funciona" data-ev-loc="hero">Ver cómo funciona</a>
                 </div>
 
                 <p class="support">Analizamos uno de tus procesos actuales y te mostramos qué partes pueden automatizarse, cuánto trabajo puedes ahorrar y qué solución necesitas.</p>
@@ -710,6 +908,48 @@
             </div>
 
             <p class="solution-highlight">La persona deja de hacer el trabajo repetitivo y pasa a revisar únicamente los casos que requieren atención.</p>
+        </div>
+
+        <!-- ── Antes / Después ── -->
+        <div class="section" id="antes-despues">
+            <p class="section-label">Ejemplo concreto</p>
+            <h2>Por ejemplo: el procesamiento de tus facturas de compra</h2>
+            <p class="lead">El mismo documento, el mismo resultado final. Lo que cambia es quién hace cada paso.</p>
+
+            <div class="ba-grid">
+                <div class="ba-col before">
+                    <p class="ba-head">Antes</p>
+                    <p class="ba-sub">Una persona, documento por documento.</p>
+                    <ul class="ba-list">
+                        <li>Recibir la factura</li>
+                        <li class="manual">Abrir el PDF</li>
+                        <li class="manual">Leer y ubicar los datos</li>
+                        <li class="manual">Copiar el RUT del emisor</li>
+                        <li class="manual">Copiar el proveedor</li>
+                        <li class="manual">Copiar folio y fecha</li>
+                        <li class="manual">Copiar neto, IVA y total</li>
+                        <li class="manual">Ingresar todo al sistema</li>
+                        <li class="manual">Revisar que no haya errores</li>
+                    </ul>
+                    <p class="ba-foot">Cada documento vuelve a empezar desde cero.</p>
+                </div>
+
+                <div class="ba-col after">
+                    <p class="ba-head">Después</p>
+                    <p class="ba-sub">El proceso corre solo; la persona revisa.</p>
+                    <ul class="ba-list">
+                        <li>Recibir la factura</li>
+                        <li>La IA procesa el documento</li>
+                        <li>Información estructurada</li>
+                        <li>Validación automática</li>
+                        <li class="review">Revisar solo las excepciones</li>
+                        <li>Sistema / Excel / ERP</li>
+                    </ul>
+                    <p class="ba-foot">El trabajo manual queda acotado a lo que de verdad necesita criterio.</p>
+                </div>
+            </div>
+
+            <p class="ba-quote">Lo que antes requería minutos de trabajo por documento puede convertirse en un proceso automático.</p>
         </div>
 
         <!-- ── Qué podemos automatizar ── -->
@@ -842,8 +1082,20 @@
             </div>
         </div>
 
-        <!-- ── Precios ── -->
+        <!-- ── Primeros casos ── -->
         <div class="section">
+            <p class="section-label">Etapa actual</p>
+            <div class="early-box">
+                <h3>¿Quieres ser uno de nuestros primeros casos?</h3>
+                <p>Estamos seleccionando un número acotado de empresas para implementar automatizaciones concretas. A cambio de autorización para publicar el resultado como caso de estudio, el precio de la primera implementación es preferente.</p>
+                <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20postular%20mi%20proceso%20como%20uno%20de%20los%20primeros%20casos%20%28ref%3A%20primeros-casos%29" target="_blank" rel="noopener noreferrer" class="btn-primary" data-ev="cta_whatsapp" data-ev-loc="primeros_casos">
+                    Quiero postular mi proceso
+                </a>
+            </div>
+        </div>
+
+        <!-- ── Precios ── -->
+        <div class="section" id="precios">
             <p class="section-label">Oferta comercial</p>
             <h2>Comienza con una automatización concreta</h2>
             <p class="lead">Precios iniciales/orientativos. Se confirman después de evaluar el proceso de tu empresa.</p>
@@ -852,13 +1104,14 @@
                 <div class="price-card">
                     <h3>Diagnóstico</h3>
                     <div class="price">Gratis</div>
+                    <p class="offer">Mándanos 20 de tus documentos reales. Los procesamos y te mostramos el resultado, sin costo.</p>
                     <ul>
                         <li>Reunión de 20–30 minutos</li>
                         <li>Revisión de un proceso</li>
                         <li>Identificación de oportunidades</li>
                         <li>Recomendación inicial</li>
                     </ul>
-                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito" target="_blank" rel="noopener noreferrer" class="btn-price">Solicitar diagnóstico</a>
+                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito%20%28ref%3A%20precio-diagnostico%29" target="_blank" rel="noopener noreferrer" class="btn-price" data-ev="cta_whatsapp" data-ev-loc="precio_diagnostico">Solicitar diagnóstico</a>
                 </div>
                 <div class="price-card featured">
                     <h3>Automatización Básica</h3>
@@ -871,7 +1124,7 @@
                         <li>Integración básica</li>
                         <li>30 días de soporte</li>
                     </ul>
-                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20automatizar%20un%20proceso" target="_blank" rel="noopener noreferrer" class="btn-price">Quiero automatizar un proceso</a>
+                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20automatizar%20un%20proceso%20%28ref%3A%20precio-basica%29" target="_blank" rel="noopener noreferrer" class="btn-price" data-ev="cta_whatsapp" data-ev-loc="precio_basica">Quiero automatizar un proceso</a>
                 </div>
                 <div class="price-card">
                     <h3>Automatización Integrada</h3>
@@ -883,7 +1136,7 @@
                         <li>Procesamiento y registro automático</li>
                         <li>Soporte inicial</li>
                     </ul>
-                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20evaluar%20mi%20proceso%20para%20una%20automatizaci%C3%B3n%20integrada" target="_blank" rel="noopener noreferrer" class="btn-price">Evaluar mi proceso</a>
+                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20evaluar%20mi%20proceso%20para%20una%20automatizaci%C3%B3n%20integrada%20%28ref%3A%20precio-integrada%29" target="_blank" rel="noopener noreferrer" class="btn-price" data-ev="cta_whatsapp" data-ev-loc="precio_integrada">Evaluar mi proceso</a>
                 </div>
                 <div class="price-card">
                     <h3>Mantención</h3>
@@ -894,7 +1147,7 @@
                         <li>Monitoreo</li>
                         <li>Mantenimiento de integraciones</li>
                     </ul>
-                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20consultar%20por%20soporte%20y%20mantenci%C3%B3n" target="_blank" rel="noopener noreferrer" class="btn-price">Consultar soporte</a>
+                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20consultar%20por%20soporte%20y%20mantenci%C3%B3n%20%28ref%3A%20precio-mantencion%29" target="_blank" rel="noopener noreferrer" class="btn-price" data-ev="cta_whatsapp" data-ev-loc="precio_mantencion">Consultar soporte</a>
                 </div>
             </div>
 
@@ -924,6 +1177,14 @@
                     <p>Sí. Por eso las soluciones deben incorporar validaciones y, cuando corresponde, revisión humana. El objetivo es automatizar el proceso manteniendo controles adecuados.</p>
                 </details>
                 <details class="faq-item">
+                    <summary>¿Qué pasa con mis documentos? ¿Quedan guardados?</summary>
+                    <p>Los documentos que nos compartas se usan únicamente para evaluar y construir tu automatización. No se comparten con terceros ni se utilizan para entrenar modelos. Si necesitas un acuerdo de confidencialidad por escrito antes de enviarnos nada, lo firmamos sin problema. Para una primera evaluación también puedes enviarnos documentos de prueba o con los datos sensibles tachados.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Y si mis documentos son escaneados o de mala calidad?</summary>
+                    <p>Se pueden procesar, pero la calidad del documento influye en el resultado. Por eso la solución no se diseña asumiendo que todo saldrá bien: incorpora validaciones y marca los casos dudosos para que una persona los revise. Un escaneo torcido o una foto con reflejo pueden terminar en la cola de excepciones en lugar de pasar directo.</p>
+                </details>
+                <details class="faq-item">
                     <summary>¿Cuánto cuesta?</summary>
                     <p>Las automatizaciones básicas parten desde $490.000 CLP. El precio final depende de la complejidad del proceso y de las integraciones necesarias.</p>
                 </details>
@@ -945,16 +1206,119 @@
             <p class="lead">Cuéntanos cómo funciona. Analizamos el proceso y te mostramos qué parte puede automatizarse, qué tecnología necesitamos y cuánto podría costar.</p>
 
             <div class="cta-row">
-                <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso%20%28ref%3A%20cierre%29" target="_blank" rel="noopener noreferrer" class="btn-primary" data-ev="cta_whatsapp" data-ev-loc="cierre">
                     Solicita un diagnóstico gratuito
                 </a>
-                <a href="mailto:hernan@thiers.cl" class="btn-secondary">Escribir por correo</a>
+                <a href="mailto:hernan@thiers.cl" class="btn-secondary" data-ev="cta_email" data-ev-loc="cierre">Escribir por correo</a>
             </div>
         </div>
 
-        <p class="footer-note">Automatización Inteligente de Documentos — un servicio de Thiers.cl Consultoría</p>
+        <p class="footer-note">Automatización Inteligente de Documentos — un servicio de Thiers.cl Consultoría<br>
+            <a href="/privacidad/">Privacidad y tratamiento de datos</a></p>
 
     </div>
+
+    <script>
+    /*
+     * Instrumentación de conversiones — puesta, pero dormida a propósito.
+     *
+     * Hoy NO hay proveedor conectado, así que no se registra nada: es lo esperado,
+     * no un error. La medición actual es Cloudflare Web Analytics (visitas) más el
+     * recuento manual de conversaciones de WhatsApp, atribuidas por el "(ref: ...)"
+     * que viaja en el texto de cada enlace wa.me.
+     *
+     * Este código queda para no tener que reinstrumentar la página más adelante:
+     * entrega a zaraz.track o a gtag si alguno se carga, y si no, encola. Conectar
+     * un destino es una decisión de la Fase 3 / campañas pagadas.
+     *
+     * El razonamiento completo: docs/plan_landing_y_mvp_demo.md §4.1
+     */
+    (function () {
+        'use strict';
+
+        var queue = [];
+        var origen = null;
+
+        // Origen del visitante: se adjunta a cada evento para poder atribuir.
+        try {
+            var qs = new URLSearchParams(window.location.search);
+            var utm = {};
+            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(function (k) {
+                if (qs.get(k)) { utm[k] = qs.get(k); }
+            });
+            if (!Object.keys(utm).length && document.referrer) {
+                try { utm.referrer = new URL(document.referrer).hostname; } catch (e) {}
+            }
+            if (Object.keys(utm).length) { origen = utm; }
+        } catch (e) {}
+
+        function entregar(nombre, props) {
+            if (window.zaraz && typeof window.zaraz.track === 'function') {
+                window.zaraz.track(nombre, props);
+                return true;
+            }
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', nombre, props);
+                return true;
+            }
+            return false;
+        }
+
+        function vaciarCola() {
+            while (queue.length) {
+                if (!entregar(queue[0][0], queue[0][1])) { return; }
+                queue.shift();
+            }
+        }
+
+        function track(nombre, props) {
+            props = props || {};
+            if (origen) {
+                for (var k in origen) { if (!(k in props)) { props[k] = origen[k]; } }
+            }
+            vaciarCola();
+            if (!entregar(nombre, props)) {
+                queue.push([nombre, props]);
+                if (queue.length > 50) { queue.shift(); }
+            }
+        }
+
+        // Expuesto para que la demo (Fase 2) registre sus propios eventos.
+        window.thTrack = track;
+
+        // Clicks: cualquier elemento con data-ev.
+        document.addEventListener('click', function (ev) {
+            var el = ev.target.closest('[data-ev]');
+            if (!el) { return; }
+            track(el.getAttribute('data-ev'), {
+                ubicacion: el.getAttribute('data-ev-loc') || 'sin-ubicacion'
+            });
+        });
+
+        // ¿Llegan a ver el precio, o abandonan antes?
+        var precios = document.getElementById('precios');
+        if (precios && 'IntersectionObserver' in window) {
+            var obs = new IntersectionObserver(function (entradas) {
+                entradas.forEach(function (e) {
+                    if (e.isIntersecting) {
+                        track('scroll_precios', {});
+                        obs.disconnect();
+                    }
+                });
+            }, { threshold: 0.3 });
+            obs.observe(precios);
+        }
+
+        // Qué dudas tienen: solo al abrir, no al cerrar.
+        Array.prototype.forEach.call(document.querySelectorAll('.faq-item'), function (item) {
+            item.addEventListener('toggle', function () {
+                if (!item.open) { return; }
+                var titulo = item.querySelector('summary');
+                track('faq_abierta', { pregunta: titulo ? titulo.textContent.trim() : '' });
+            });
+        });
+    }());
+    </script>
 
 </body>
 </html>
