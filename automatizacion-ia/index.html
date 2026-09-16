@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatización de Procesos con IA para Empresas | Hernán Thiers</title>
+    <meta name="description" content="Automatizamos procesos administrativos, documentos y tareas repetitivas utilizando IA y software a medida. Solicita un diagnóstico gratuito.">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0f172a;
+            color: #f1f5f9;
+            background-image:
+                radial-gradient(ellipse 80% 60% at 10% 0%, #1e3a5f55 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 90% 30%, #1e1b4b40 0%, transparent 50%);
+        }
+
+        .wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Barra superior ── */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 28px 0;
+        }
+
+        .back-link {
+            font-size: 9.5pt;
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover { color: #94a3b8; }
+
+        .topbar .btn-whatsapp-small {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #f1f5f9;
+            border-radius: 8px;
+            font-size: 9.5pt;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .topbar .btn-whatsapp-small:hover { border-color: #25d366; }
+
+        /* ── Hero ── */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 48px;
+            align-items: center;
+            padding: 48px 0 80px;
+        }
+
+        .hero h1 {
+            font-size: 34pt;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.15;
+            color: #f1f5f9;
+            margin-bottom: 20px;
+        }
+
+        .hero .sub {
+            font-size: 13pt;
+            line-height: 1.6;
+            color: #94a3b8;
+            max-width: 520px;
+            margin-bottom: 32px;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 26px;
+            border-radius: 10px;
+            font-size: 11pt;
+            font-weight: 700;
+            text-decoration: none;
+            background: #25d366;
+            color: #06210f;
+            transition: opacity 0.2s, transform 0.15s;
+        }
+
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-size: 11pt;
+            font-weight: 600;
+            text-decoration: none;
+            background: transparent;
+            color: #f1f5f9;
+            border: 1px solid #334155;
+        }
+
+        .btn-secondary:hover { border-color: #38bdf8; color: #38bdf8; }
+
+        .hero .support {
+            font-size: 9.5pt;
+            color: #64748b;
+            max-width: 460px;
+            line-height: 1.6;
+        }
+
+        /* ── Diagrama del flujo (hero) ── */
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            background: #1e293b40;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 36px 24px;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            max-width: 260px;
+            padding: 14px 18px;
+            background: #1e293b80;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            font-size: 10pt;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .flow-step .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #38bdf8;
+            flex-shrink: 0;
+        }
+
+        .flow-arrow {
+            color: #334155;
+            font-size: 14pt;
+            line-height: 1;
+            padding: 6px 0;
+        }
+
+        /* Cascada: el resalte recorre cada recuadro y flecha en secuencia, en loop */
+        .flow-step {
+            animation: flowStepPulse 3.6s ease-in-out infinite;
+        }
+
+        .flow-step .dot {
+            animation: flowDotPulse 3.6s ease-in-out infinite;
+        }
+
+        .flow-arrow {
+            animation: flowArrowPulse 3.6s ease-in-out infinite;
+        }
+
+        @keyframes flowStepPulse {
+            0%, 20%, 100% { border-color: #334155; background: #1e293b80; }
+            8% { border-color: #38bdf860; background: #38bdf815; }
+        }
+
+        @keyframes flowDotPulse {
+            0%, 20%, 100% { background: #38bdf8; box-shadow: none; }
+            8% { background: #38bdf8; box-shadow: 0 0 8px #38bdf8; }
+        }
+
+        @keyframes flowArrowPulse {
+            0%, 20%, 100% { color: #334155; }
+            8% { color: #38bdf8; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .flow-step, .flow-step .dot, .flow-arrow { animation: none; }
+        }
+
+        /* ── Secciones ── */
+        .section {
+            padding: 64px 0;
+            border-top: 1px solid #1e293b;
+        }
+
+        .section-label {
+            font-size: 9pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #38bdf8;
+            margin-bottom: 14px;
+        }
+
+        .section h2 {
+            font-size: 22pt;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #f1f5f9;
+            max-width: 700px;
+            margin-bottom: 16px;
+        }
+
+        .section .lead {
+            font-size: 11.5pt;
+            line-height: 1.7;
+            color: #94a3b8;
+            max-width: 640px;
+            margin-bottom: 36px;
+        }
+
+        /* Grid de tarjetas (problema) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .problem-card {
+            background: #1e293b60;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .problem-card h3 {
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 8px;
+        }
+
+        .problem-card p {
+            font-size: 9.5pt;
+            line-height: 1.6;
+            color: #64748b;
+        }
+
+        .cards-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .cards-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+        /* ── Solución: flujo horizontal de 5 pasos ── */
+        .solution-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .solution-flow .node {
+            flex: 1 1 150px;
+            text-align: center;
+            padding: 18px 12px;
+            background: #1e293b60;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            font-size: 9.5pt;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .solution-flow .arrow {
+            color: #334155;
+            font-size: 14pt;
+            flex-shrink: 0;
+        }
+
+        .solution-flow .node.ai {
+            border-color: #38bdf8;
+            background: #38bdf815;
+            color: #38bdf8;
+            animation: aiNodeGlow 2.2s ease-in-out infinite;
+        }
+
+        @keyframes aiNodeGlow {
+            0%, 100% { box-shadow: 0 0 0 0 #38bdf850; }
+            50% { box-shadow: 0 0 0 6px #38bdf800; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .solution-flow .node.ai { animation: none; }
+        }
+
+        .solution-highlight {
+            margin-top: 28px;
+            font-size: 11.5pt;
+            font-weight: 700;
+            color: #f1f5f9;
+            max-width: 640px;
+            line-height: 1.6;
+        }
+
+        /* ── Qué podemos automatizar ── */
+        .auto-card h3 {
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 12px;
+        }
+
+        .auto-card ul {
+            list-style: none;
+        }
+
+        .auto-card li {
+            font-size: 9.5pt;
+            line-height: 1.9;
+            color: #94a3b8;
+        }
+
+        .auto-card li::before {
+            content: '—';
+            color: #334155;
+            margin-right: 8px;
+        }
+
+        /* ── Integraciones ── */
+        .integrations-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .integration-tag {
+            padding: 8px 16px;
+            background: #1e293b60;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            font-size: 9.5pt;
+            color: #94a3b8;
+        }
+
+        .highlight-box {
+            padding: 28px 32px;
+            background: #38bdf80d;
+            border: 1px solid #38bdf830;
+            border-radius: 14px;
+            font-size: 13pt;
+            font-weight: 700;
+            color: #f1f5f9;
+            line-height: 1.5;
+        }
+
+        /* ── Cómo funciona (pasos numerados) ── */
+        .steps {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 36px;
+            bottom: -16px;
+            width: 1px;
+            background: #1e293b;
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #1e293b;
+            border: 1px solid #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9pt;
+            font-weight: 700;
+            color: #38bdf8;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-body { padding-bottom: 32px; }
+
+        .step-body h3 {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 4px;
+        }
+
+        .step-body p {
+            font-size: 9.5pt;
+            line-height: 1.6;
+            color: #64748b;
+        }
+
+        /* ── Experiencia técnica ── */
+        .experience-box {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            padding: 28px;
+            background: #1e293b40;
+            border: 1px solid #1e293b;
+            border-radius: 14px;
+        }
+
+        .experience-box .avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+            flex-shrink: 0;
+        }
+
+        .experience-box p {
+            font-size: 10.5pt;
+            line-height: 1.7;
+            color: #94a3b8;
+        }
+
+        .experience-box .quote {
+            margin-top: 14px;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+
+        /* ── Precios ── */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .price-card {
+            display: flex;
+            flex-direction: column;
+            padding: 24px 20px;
+            background: #1e293b60;
+            border: 1px solid #1e293b;
+            border-radius: 14px;
+        }
+
+        .price-card.featured {
+            border-color: #38bdf860;
+            background: #38bdf80d;
+        }
+
+        .price-card h3 {
+            font-size: 10pt;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 6px;
+        }
+
+        .price-card .price {
+            font-size: 15pt;
+            font-weight: 800;
+            color: #38bdf8;
+            margin-bottom: 16px;
+        }
+
+        .price-card ul {
+            list-style: none;
+            flex: 1;
+            margin-bottom: 20px;
+        }
+
+        .price-card li {
+            font-size: 9pt;
+            line-height: 1.9;
+            color: #94a3b8;
+        }
+
+        .price-card li::before {
+            content: '✓';
+            color: #38bdf8;
+            margin-right: 8px;
+        }
+
+        .price-card .btn-price {
+            display: block;
+            text-align: center;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 9.5pt;
+            font-weight: 700;
+            text-decoration: none;
+            background: #1e293b;
+            color: #f1f5f9;
+            border: 1px solid #334155;
+        }
+
+        .price-card.featured .btn-price {
+            background: #25d366;
+            color: #06210f;
+            border: none;
+        }
+
+        .price-card .btn-price:hover { opacity: 0.85; }
+
+        .pricing-note {
+            margin-top: 20px;
+            font-size: 9pt;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        /* ── FAQ ── */
+        .faq-item {
+            border-bottom: 1px solid #1e293b;
+            padding: 18px 0;
+        }
+
+        .faq-item summary {
+            cursor: pointer;
+            font-size: 11pt;
+            font-weight: 700;
+            color: #f1f5f9;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary::after {
+            content: '+';
+            color: #38bdf8;
+            font-size: 16pt;
+            font-weight: 400;
+            margin-left: 16px;
+            flex-shrink: 0;
+        }
+
+        .faq-item[open] summary::after { content: '−'; }
+
+        .faq-item p {
+            margin-top: 12px;
+            font-size: 10pt;
+            line-height: 1.7;
+            color: #94a3b8;
+            max-width: 700px;
+        }
+
+        /* ── Cierre ── */
+        .closing {
+            text-align: center;
+            padding: 24px 0 80px;
+        }
+
+        .closing h2 {
+            font-size: 24pt;
+            max-width: 700px;
+            margin: 0 auto 16px;
+        }
+
+        .closing .lead {
+            margin: 0 auto 32px;
+        }
+
+        .closing .cta-row { justify-content: center; }
+
+        .footer-note {
+            text-align: center;
+            padding-bottom: 40px;
+            font-size: 9pt;
+            color: #475569;
+        }
+
+        @media (max-width: 780px) {
+            .hero { grid-template-columns: 1fr; padding-top: 24px; }
+            .hero h1 { font-size: 26pt; }
+            .cards-grid, .cards-grid.cols-2, .cards-grid.cols-4 { grid-template-columns: 1fr; }
+            .solution-flow { flex-direction: column; }
+            .solution-flow .arrow { transform: rotate(90deg); }
+            .pricing-grid { grid-template-columns: 1fr 1fr; }
+            .experience-box { flex-direction: column; }
+        }
+
+        @media (max-width: 480px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrap">
+
+        <div class="topbar">
+            <a href="/" class="back-link">← Hernán Thiers</a>
+            <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-small">
+                Hablar por WhatsApp
+            </a>
+        </div>
+
+        <!-- ── Hero ── -->
+        <div class="hero">
+            <div>
+                <h1>Automatiza tus procesos administrativos con IA</h1>
+                <p class="sub">Reduce el trabajo manual de tu equipo. Procesamos documentos, extraemos información y conectamos tus procesos con los sistemas que ya utilizas.</p>
+
+                <div class="cta-row">
+                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        Solicita un diagnóstico gratuito
+                    </a>
+                    <a href="#solucion" class="btn-secondary">Ver cómo funciona</a>
+                </div>
+
+                <p class="support">Analizamos uno de tus procesos actuales y te mostramos qué partes pueden automatizarse, cuánto trabajo puedes ahorrar y qué solución necesitas.</p>
+            </div>
+
+            <div class="flow-diagram">
+                <div class="flow-step" style="animation-delay:0s"><span class="dot" style="animation-delay:0s"></span> PDF / Correo</div>
+                <div class="flow-arrow" style="animation-delay:0.45s">↓</div>
+                <div class="flow-step" style="animation-delay:0.9s"><span class="dot" style="animation-delay:0.9s"></span> IA extrae la información</div>
+                <div class="flow-arrow" style="animation-delay:1.35s">↓</div>
+                <div class="flow-step" style="animation-delay:1.8s"><span class="dot" style="animation-delay:1.8s"></span> Validación</div>
+                <div class="flow-arrow" style="animation-delay:2.25s">↓</div>
+                <div class="flow-step" style="animation-delay:2.7s"><span class="dot" style="animation-delay:2.7s"></span> Sistema / Excel / ERP</div>
+            </div>
+        </div>
+
+        <!-- ── Problema ── -->
+        <div class="section">
+            <p class="section-label">El problema</p>
+            <h2>¿Cuánto tiempo pierde tu equipo haciendo tareas que podrían automatizarse?</h2>
+            <p class="lead">Abrir documentos, copiar datos, completar Excel, revisar información, enviar correos y traspasar datos entre sistemas son tareas necesarias, pero no necesariamente tienen que hacerse manualmente.</p>
+
+            <div class="cards-grid">
+                <div class="problem-card">
+                    <h3>Documentos</h3>
+                    <p>Revisar PDFs, facturas, formularios y otros documentos.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Digitación</h3>
+                    <p>Copiar información manualmente entre documentos y sistemas.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Excel</h3>
+                    <p>Consolidar y actualizar planillas constantemente.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Correos</h3>
+                    <p>Revisar, clasificar y responder solicitudes repetitivas.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Reportes</h3>
+                    <p>Recopilar información manualmente para generar informes.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Sistemas</h3>
+                    <p>Ingresar la misma información en diferentes plataformas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Solución ── -->
+        <div class="section" id="solucion">
+            <p class="section-label">La solución</p>
+            <h2>Nosotros automatizamos el proceso completo</h2>
+            <p class="lead">Diseñamos una solución adaptada al proceso real de tu empresa. La IA se encarga de interpretar la información y el software se encarga de procesarla, validarla y llevarla al lugar donde necesitas utilizarla.</p>
+
+            <div class="solution-flow">
+                <div class="node">Documento / correo</div>
+                <div class="arrow">→</div>
+                <div class="node">Lectura automática</div>
+                <div class="arrow">→</div>
+                <div class="node ai">IA extrae la información</div>
+                <div class="arrow">→</div>
+                <div class="node">Validación</div>
+                <div class="arrow">→</div>
+                <div class="node">Sistema / Excel / Base de datos</div>
+            </div>
+
+            <p class="solution-highlight">La persona deja de hacer el trabajo repetitivo y pasa a revisar únicamente los casos que requieren atención.</p>
+        </div>
+
+        <!-- ── Qué podemos automatizar ── -->
+        <div class="section">
+            <p class="section-label">Alcance</p>
+            <h2>¿Qué procesos podemos automatizar?</h2>
+
+            <div class="cards-grid cols-4">
+                <div class="problem-card auto-card">
+                    <h3>Documentos</h3>
+                    <ul>
+                        <li>Facturas</li>
+                        <li>Órdenes de compra</li>
+                        <li>Formularios</li>
+                        <li>Cotizaciones</li>
+                        <li>Informes</li>
+                        <li>PDF y documentos escaneados</li>
+                    </ul>
+                </div>
+                <div class="problem-card auto-card">
+                    <h3>Información</h3>
+                    <ul>
+                        <li>Extracción de datos</li>
+                        <li>Clasificación</li>
+                        <li>Validación</li>
+                        <li>Consolidación</li>
+                        <li>Transformación de información</li>
+                    </ul>
+                </div>
+                <div class="problem-card auto-card">
+                    <h3>Comunicación</h3>
+                    <ul>
+                        <li>Clasificación de correos</li>
+                        <li>Extracción de solicitudes</li>
+                        <li>Generación de respuestas</li>
+                        <li>Notificaciones automáticas</li>
+                    </ul>
+                </div>
+                <div class="problem-card auto-card">
+                    <h3>Procesos</h3>
+                    <ul>
+                        <li>Ingreso de datos</li>
+                        <li>Generación de reportes</li>
+                        <li>Traspaso de información</li>
+                        <li>Actualización de registros</li>
+                        <li>Flujos de aprobación</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Integraciones ── -->
+        <div class="section">
+            <p class="section-label">Integraciones</p>
+            <h2>La automatización se adapta a tus sistemas</h2>
+            <p class="lead">No necesitas reemplazar tus sistemas actuales. Podemos conectar la automatización con las herramientas que ya utiliza tu empresa.</p>
+
+            <div class="integrations-row">
+                <span class="integration-tag">Excel</span>
+                <span class="integration-tag">CSV</span>
+                <span class="integration-tag">Email</span>
+                <span class="integration-tag">APIs REST</span>
+                <span class="integration-tag">MySQL</span>
+                <span class="integration-tag">PostgreSQL</span>
+                <span class="integration-tag">ERP</span>
+                <span class="integration-tag">CRM</span>
+                <span class="integration-tag">Google Drive</span>
+                <span class="integration-tag">Sistemas internos</span>
+                <span class="integration-tag">Bases de datos</span>
+            </div>
+
+            <div class="highlight-box">No reemplazamos necesariamente tu software. Automatizamos lo que ocurre alrededor de él.</div>
+        </div>
+
+        <!-- ── Cómo funciona ── -->
+        <div class="section">
+            <p class="section-label">Cómo funciona</p>
+            <h2>De un proceso manual a una automatización</h2>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-body">
+                        <h3>Analizamos</h3>
+                        <p>Revisamos cómo funciona actualmente el proceso.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-body">
+                        <h3>Identificamos</h3>
+                        <p>Detectamos qué tareas pueden automatizarse y qué información debe procesarse.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-body">
+                        <h3>Diseñamos</h3>
+                        <p>Definimos una solución utilizando IA, APIs y software a medida.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-body">
+                        <h3>Implementamos</h3>
+                        <p>Construimos e integramos la automatización con tus sistemas.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-body">
+                        <h3>Acompañamos</h3>
+                        <p>Mantenemos y mejoramos la solución después de su implementación.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Experiencia ── -->
+        <div class="section">
+            <p class="section-label">Experiencia</p>
+            <h2>Trayectoria como consultor y desarrollo de sistemas a nivel Internacional</h2>
+
+            <div class="experience-box">
+                <div class="avatar">HT</div>
+                <div>
+                    <p>Soy ingeniero informático con más de 15 años de experiencia en desarrollo de software, integración de sistemas, APIs, bases de datos y automatización, trabajando con clientes en Chile y en el extranjero.</p>
+                    <p class="quote">La IA acelera el desarrollo. La experiencia permite construir una solución que realmente funcione en producción.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Precios ── -->
+        <div class="section">
+            <p class="section-label">Oferta comercial</p>
+            <h2>Comienza con una automatización concreta</h2>
+            <p class="lead">Precios iniciales/orientativos. Se confirman después de evaluar el proceso de tu empresa.</p>
+
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Diagnóstico</h3>
+                    <div class="price">Gratis</div>
+                    <ul>
+                        <li>Reunión de 20–30 minutos</li>
+                        <li>Revisión de un proceso</li>
+                        <li>Identificación de oportunidades</li>
+                        <li>Recomendación inicial</li>
+                    </ul>
+                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito" target="_blank" rel="noopener noreferrer" class="btn-price">Solicitar diagnóstico</a>
+                </div>
+                <div class="price-card featured">
+                    <h3>Automatización Básica</h3>
+                    <div class="price">Desde $490.000</div>
+                    <ul>
+                        <li>Un proceso automatizado</li>
+                        <li>Procesamiento de documentos</li>
+                        <li>Extracción mediante IA</li>
+                        <li>Validación y salida estructurada</li>
+                        <li>Integración básica</li>
+                        <li>30 días de soporte</li>
+                    </ul>
+                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20automatizar%20un%20proceso" target="_blank" rel="noopener noreferrer" class="btn-price">Quiero automatizar un proceso</a>
+                </div>
+                <div class="price-card">
+                    <h3>Automatización Integrada</h3>
+                    <div class="price">Desde $790.000</div>
+                    <ul>
+                        <li>Automatización del proceso + IA</li>
+                        <li>Base de datos</li>
+                        <li>API o integración con sistema existente</li>
+                        <li>Procesamiento y registro automático</li>
+                        <li>Soporte inicial</li>
+                    </ul>
+                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20evaluar%20mi%20proceso%20para%20una%20automatizaci%C3%B3n%20integrada" target="_blank" rel="noopener noreferrer" class="btn-price">Evaluar mi proceso</a>
+                </div>
+                <div class="price-card">
+                    <h3>Mantención</h3>
+                    <div class="price">Desde $120.000/mes</div>
+                    <ul>
+                        <li>Soporte y correcciones</li>
+                        <li>Ajustes y mejoras menores</li>
+                        <li>Monitoreo</li>
+                        <li>Mantenimiento de integraciones</li>
+                    </ul>
+                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20consultar%20por%20soporte%20y%20mantenci%C3%B3n" target="_blank" rel="noopener noreferrer" class="btn-price">Consultar soporte</a>
+                </div>
+            </div>
+
+            <p class="pricing-note">Los precios son iniciales/orientativos y se confirman después de evaluar el proceso de tu empresa.</p>
+        </div>
+
+        <!-- ── FAQ ── -->
+        <div class="section">
+            <p class="section-label">Preguntas frecuentes</p>
+            <h2>Lo que suelen preguntarnos</h2>
+
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>¿Necesito cambiar mi sistema actual?</summary>
+                    <p>No necesariamente. Podemos integrar la automatización con sistemas, bases de datos, archivos o APIs que ya utiliza tu empresa.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Necesito tener conocimientos de IA?</summary>
+                    <p>No. Nosotros nos encargamos de la implementación y de la parte técnica.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Qué documentos se pueden procesar?</summary>
+                    <p>Podemos trabajar con distintos tipos de documentos, como PDFs, formularios, facturas, órdenes de compra e imágenes, dependiendo del caso.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>¿La IA puede cometer errores?</summary>
+                    <p>Sí. Por eso las soluciones deben incorporar validaciones y, cuando corresponde, revisión humana. El objetivo es automatizar el proceso manteniendo controles adecuados.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Cuánto cuesta?</summary>
+                    <p>Las automatizaciones básicas parten desde $490.000 CLP. El precio final depende de la complejidad del proceso y de las integraciones necesarias.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Cuánto demora?</summary>
+                    <p>Depende del proceso. Una automatización sencilla puede implementarse rápidamente, mientras que una integración con sistemas existentes puede requerir más trabajo. El plazo se define después del diagnóstico.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Puedo probar antes de contratar?</summary>
+                    <p>El diagnóstico inicial permite revisar tu proceso y determinar si existe una oportunidad concreta de automatización.</p>
+                </details>
+            </div>
+        </div>
+
+        <!-- ── Cierre + CTA final ── -->
+        <div class="section closing">
+            <p class="section-label" style="text-align:center;">¿Vamos a hablar de tu proceso?</p>
+            <h2>¿Qué proceso estás haciendo manualmente hoy?</h2>
+            <p class="lead">Cuéntanos cómo funciona. Analizamos el proceso y te mostramos qué parte puede automatizarse, qué tecnología necesitamos y cuánto podría costar.</p>
+
+            <div class="cta-row">
+                <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    Solicita un diagnóstico gratuito
+                </a>
+                <a href="mailto:hernan@thiers.cl" class="btn-secondary">Escribir por correo</a>
+            </div>
+        </div>
+
+        <p class="footer-note">Automatización Inteligente de Documentos — un servicio de Thiers.cl Consultoría</p>
+
+    </div>
+
+</body>
+</html>

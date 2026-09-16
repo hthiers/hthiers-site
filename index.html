@@ -103,6 +103,45 @@
             letter-spacing: 0.3px;
         }
 
+        /* ── Producto destacado ── */
+        .featured-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: fit-content;
+            padding: 12px 18px;
+            margin-bottom: 32px;
+            background: #38bdf80d;
+            border: 1px solid #38bdf830;
+            border-radius: 10px;
+            color: #f1f5f9;
+            text-decoration: none;
+            font-size: 10pt;
+            font-weight: 600;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .featured-link:hover {
+            border-color: #38bdf860;
+            background: #38bdf81a;
+        }
+
+        .featured-badge {
+            padding: 3px 9px;
+            background: #38bdf8;
+            color: #0f172a;
+            border-radius: 5px;
+            font-size: 8pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .featured-arrow {
+            color: #38bdf8;
+            margin-left: auto;
+        }
+
         /* ── Separador ── */
         .divider {
             height: 1px;
@@ -383,6 +422,13 @@
             <span class="tag">Automation</span>
             <span class="tag">Software Engineering</span>
         </div>
+
+        <!-- Producto destacado -->
+        <a href="/automatizacion-ia/" class="featured-link">
+            <span class="featured-badge">Servicio</span>
+            <span>Automatización Inteligente de Documentos con IA</span>
+            <span class="featured-arrow">→</span>
+        </a>
 
         <!-- Separador -->
         <div class="divider"></div>
