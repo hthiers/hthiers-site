@@ -203,11 +203,11 @@ Pequeñas y medianas empresas con tareas administrativas repetitivas. En particu
 | Plan | Precio | Incluye |
 |---|---|---|
 | **Diagnóstico** | **Gratis** | Reunión de 20–30 minutos, revisión de un proceso, oportunidades de automatización y recomendación inicial. **Además: nos envías 20 documentos reales, los procesamos y te mostramos el resultado, sin costo.** |
-| **Automatización Básica** | Desde $490.000 CLP | Un proceso automatizado, procesamiento de documentos, extracción con IA, validación, salida estructurada, integración básica y 30 días de soporte. |
-| **Automatización Integrada** | Desde $790.000 CLP | Todo lo anterior, más base de datos, integración con un sistema existente vía API, y registro automático de resultados. |
-| **Mantención** | Desde $120.000 CLP/mes | Soporte, correcciones, ajustes, monitoreo, mejoras menores y mantenimiento de integraciones. |
+| **Automatización Básica** | Desde $590.000 CLP | Un proceso automatizado, procesamiento de documentos, extracción con IA, validación, salida estructurada, integración básica y 30 días de soporte. |
+| **Automatización Integrada** | Desde $990.000 CLP | Todo lo anterior, más base de datos, integración con un sistema existente vía API, y registro automático de resultados. |
+| **Mantención** | Desde $180.000 CLP/mes | Soporte, correcciones, ajustes, monitoreo, mejoras menores y mantenimiento de integraciones. |
 
-*Los precios son iniciales y orientativos. Se confirman después de evaluar el proceso de cada empresa.*
+*Los precios son netos e iniciales. Se confirman después de evaluar el proceso de cada empresa.*
 
 **Primeros casos:** estamos seleccionando un número acotado de empresas. A cambio de autorización para publicar el resultado como caso de estudio, la primera implementación tiene precio preferente.
 

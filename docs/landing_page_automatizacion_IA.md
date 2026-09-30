@@ -17,13 +17,13 @@ Convertir visitas en solicitudes de:
 
 ### Oferta inicial
 
-**Automatización básica:** desde $490.000 CLP.
+**Automatización básica:** desde $590.000 CLP.
 
-**Automatización integrada:** aproximadamente $790.000–$1.200.000 CLP, dependiendo del proceso y las integraciones.
+**Automatización integrada:** desde $990.000 CLP, dependiendo del proceso y las integraciones.
 
-**Soporte y mantenimiento:** desde $120.000 CLP/mes.
+**Soporte y mantenimiento:** desde $180.000 CLP/mes.
 
-> Los precios deben mostrarse como precios iniciales/orientativos y confirmarse después de evaluar el proceso del cliente.
+> Los precios deben mostrarse como precios netos e iniciales, y confirmarse después de evaluar el proceso del cliente.
 
 ---
 
@@ -465,7 +465,7 @@ CTA:
 
 ## Automatización Básica
 
-**Desde $490.000 CLP**
+**Desde $590.000 CLP**
 
 Incluye:
 
@@ -486,7 +486,7 @@ CTA:
 
 ## Automatización Integrada
 
-**Desde $790.000 CLP**
+**Desde $990.000 CLP**
 
 Incluye:
 
@@ -507,7 +507,7 @@ CTA:
 
 ## Mantención
 
-**Desde $120.000 CLP/mes**
+**Desde $180.000 CLP/mes**
 
 Incluye:
 
@@ -597,7 +597,7 @@ Botón:
 
 ## ¿Cuánto cuesta?
 
-> Las automatizaciones básicas parten desde $490.000 CLP. El precio final depende de la complejidad del proceso y de las integraciones necesarias.
+> Las automatizaciones básicas parten desde $590.000 CLP netos. El precio final depende de la complejidad del proceso y de las integraciones necesarias.
 
 ## ¿Cuánto demora?
 
@@ -930,7 +930,7 @@ No llenar la página de keywords. El contenido debe escribirse primero para pers
 
 # 30. Estrategia de conversión
 
-La landing page no tiene como objetivo que el visitante compre directamente $490.000.
+La landing page no tiene como objetivo que el visitante compre directamente $590.000.
 
 El objetivo es conseguir una conversación.
 
@@ -1087,11 +1087,11 @@ La landing page debe vender una **solución de automatización**, no una tecnolo
 
 ### Producto inicial
 
-**Automatización desde $490.000 CLP.**
+**Automatización desde $590.000 CLP.**
 
 ### Recurrencia
 
-**Soporte desde $120.000 CLP/mes.**
+**Soporte desde $180.000 CLP/mes.**
 
 ### Conversión
 

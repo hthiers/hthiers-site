@@ -35,7 +35,7 @@ Archivo: [../public/automatizacion-ia/index.html](../public/automatizacion-ia/in
 - `<title>` y `<meta description>` correctos según §29.
 - 7 CTAs a WhatsApp (`wa.me/56993779421`) con mensajes pre-cargados distintos por sección. Muy bien hecho.
 - Diagrama de flujo animado en el hero.
-- Precios visibles (`$490.000` / `$790.000` / `$120.000 mes`).
+- Precios visibles (`$590.000` / `$990.000` / `$180.000 mes`, netos; actualizados el 2026-09-29).
 - FAQ honesta, incluida "¿La IA puede cometer errores?".
 
 ### Brechas respecto al documento base
