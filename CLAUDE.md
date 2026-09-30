@@ -20,12 +20,12 @@ wrangler deploy
 
 ## Architecture
 
-- **[index.html](index.html)** — the home page; embedded CSS, no external dependencies
-- **[automatizacion-ia/index.html](automatizacion-ia/index.html)** — landing page for the AI automation service. Embedded CSS plus one inline `<script>` at the end of `<body>` that records conversion events (see below). Content is driven by [docs/landing_page_automatizacion_IA.md](docs/landing_page_automatizacion_IA.md); the execution plan is [docs/plan_landing_y_mvp_demo.md](docs/plan_landing_y_mvp_demo.md)
-- **[privacidad/index.html](privacidad/index.html)** — privacy and data-handling page, linked from the landing footer
-- **[wrangler.jsonc](wrangler.jsonc)** — Cloudflare Workers config; serves assets from the project root directory
+- **[public/index.html](public/index.html)** — the home page; embedded CSS, no external dependencies
+- **[public/automatizacion-ia/index.html](public/automatizacion-ia/index.html)** — landing page for the AI automation service. Embedded CSS plus one inline `<script>` at the end of `<body>` that records conversion events (see below). Content is driven by [docs/landing_page_automatizacion_IA.md](docs/landing_page_automatizacion_IA.md); the execution plan is [docs/plan_landing_y_mvp_demo.md](docs/plan_landing_y_mvp_demo.md)
+- **[public/privacidad/index.html](public/privacidad/index.html)** — privacy and data-handling page, linked from the landing footer
+- **[wrangler.jsonc](wrangler.jsonc)** — Cloudflare Workers config; serves assets from `public/`
 
-The site is served as a static asset by Cloudflare Workers. The `assets.directory: "."` in `wrangler.jsonc` means Wrangler serves files directly from the repo root.
+The site is served as static assets by Cloudflare Workers from `assets.directory: "./public"`. **Only `public/` is published**: `public/` maps to the site root (`public/automatizacion-ia/index.html` → `/automatizacion-ia/`), and everything outside it (`docs/`, `CLAUDE.md`, `.git/`, future Worker code) stays private. [public/.assetsignore](public/.assetsignore) excludes `.DS_Store` files. Do not point `assets.directory` back at the repo root: it publishes `.git/` and makes `wrangler dev` reload in an endless loop, because Wrangler writes its local state into `.wrangler/` inside the watched folder.
 
 ## Conversion tracking (landing page)
 

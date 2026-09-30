@@ -1,0 +1,3 @@
+# Archivos dentro de public/ que NO se publican (sintaxis de .gitignore).
+.assetsignore
+.DS_Store
