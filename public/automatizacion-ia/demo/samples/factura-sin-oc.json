@@ -1,0 +1,34 @@
+{
+  "id": "factura-sin-oc",
+  "titulo": "Falta la orden de compra",
+  "descripcion": "El proveedor trabaja con OC, pero la factura no la indica.",
+  "fechaReferencia": "2026-09-18",
+  "documento": {
+    "tipo": "invoice",
+    "emisor": { "name": "Distribuidora Andina SpA", "tax_id": "76.123.456-0", "giro": "Distribución de insumos de oficina", "direccion": "San Diego 1320, Santiago" },
+    "receptor": { "name": "Comercial Los Aromos SpA", "tax_id": "77.890.123-4", "giro": "Comercio al por mayor", "direccion": "Los Aromos 455, Santiago" },
+    "folio": "12345",
+    "sii": "S.I.I. - SANTIAGO CENTRO",
+    "fecha_emision": "2026-09-16",
+    "fecha_vencimiento": "2026-10-16",
+    "condicion_pago": "Crédito 30 días",
+    "referencias": [],
+    "items": [
+      { "descripcion": "Resma papel carta, 500 hojas", "cantidad": 20, "precio": 3500 },
+      { "descripcion": "Tóner compatible HP 85A", "cantidad": 2, "precio": 15000 }
+    ],
+    "neto": 100000,
+    "iva": 19000,
+    "total": 119000
+  },
+  "extraccion": {
+    "document_type": "invoice",
+    "document_number": "12345",
+    "issue_date": "2026-09-16",
+    "due_date": "2026-10-16",
+    "purchase_order_number": null,
+    "supplier": { "name": "Distribuidora Andina SpA", "tax_id": "76.123.456-0" },
+    "currency": "CLP",
+    "amounts": { "net": 100000, "tax": 19000, "total": 119000 }
+  }
+}

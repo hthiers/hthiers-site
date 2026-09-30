@@ -1,0 +1,35 @@
+{
+  "id": "orden-compra",
+  "titulo": "Orden de compra",
+  "descripcion": "Otro tipo de documento, con otros campos.",
+  "fechaReferencia": "2026-09-18",
+  "documento": {
+    "tipo": "purchase_order",
+    "comprador": { "name": "Comercial Los Aromos SpA", "tax_id": "77.890.123-4", "giro": "Comercio al por mayor", "direccion": "Los Aromos 455, Santiago" },
+    "proveedor": { "name": "Distribuidora Andina SpA", "tax_id": "76.123.456-0", "direccion": "San Diego 1320, Santiago" },
+    "numero": "4521",
+    "fecha": "2026-09-10",
+    "fecha_entrega": "2026-09-20",
+    "condiciones_pago": "30 días",
+    "lugar_entrega": "Bodega Los Aromos 455, Santiago",
+    "items": [
+      { "descripcion": "Resma papel carta, 500 hojas", "cantidad": 50, "precio": 3500 },
+      { "descripcion": "Archivador lomo ancho", "cantidad": 30, "precio": 2500 }
+    ],
+    "neto": 250000,
+    "iva": 47500,
+    "total": 297500,
+    "autoriza": "Marcela Rojas, Jefa de Compras"
+  },
+  "extraccion": {
+    "document_type": "purchase_order",
+    "document_number": "4521",
+    "issue_date": "2026-09-10",
+    "delivery_date": "2026-09-20",
+    "payment_terms": "30 días",
+    "buyer": { "name": "Comercial Los Aromos SpA", "tax_id": "77.890.123-4" },
+    "supplier": { "name": "Distribuidora Andina SpA", "tax_id": "76.123.456-0" },
+    "currency": "CLP",
+    "amounts": { "net": 250000, "tax": 47500, "total": 297500 }
+  }
+}

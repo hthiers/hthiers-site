@@ -16,7 +16,7 @@
 
 Una página que muestre, en menos de 5 minutos, la cadena completa de una automatización:
 
-**Documento → Lectura con IA → Validación por software → Salida (correo, planilla, sistema) → Impacto económico**
+**Documento → Lectura con IA → Validación por software → Salida (correo, planilla, sistema)**
 
 Sirve a dos audiencias con la misma página:
 
@@ -30,7 +30,6 @@ Sirve a dos audiencias con la misma página:
 - **"La IA lee, el software valida":** la extracción la hace el modelo; las reglas de negocio son código determinístico.
 - **"El sistema no adivina":** lo que no cuadra queda en ámbar para revisión humana. El campo en ámbar es el activo más importante de la demo (ver plan_landing §5.4).
 - **"Funciona con lo que ya tienes":** la salida llega a correo, planilla o sistema existente.
-- **"Esto te cuesta X hoy":** la calculadora cierra con los números del propio prospecto, y dice con honestidad cuándo no conviene.
 
 ---
 
@@ -81,7 +80,6 @@ Sirve a dos audiencias con la misma página:
   - **Correo:** vista previa siempre; envío real en la Fase 3.
   - **Tabla tipo sistema/ERP** dentro de la página, con la fila nueva resaltada.
   - **Vistas Excel / JSON** del resultado (las de plan_landing §5.3).
-- Calculadora de ahorro y retorno (§11).
 - Sección `#demo` en la landing.
 
 ### Fuera de alcance (v1)
@@ -132,21 +130,24 @@ El Worker usa el SDK oficial `@anthropic-ai/sdk`, lo que exige un `package.json`
 ```text
 public/                             # Lo único que se publica; es la raíz del sitio
   .assetsignore                     # Excluye .DS_Store
+  js/
+    th-track.js                     # Medición común (window.thTrack, clics con data-ev); landing y demo
   automatizacion-ia/
-    index.html                      # Landing: se agrega la sección #demo
+    index.html                      # Landing: sección #demo
     demo/
       index.html                    # La demo (CSS embebido, como el resto del sitio)
       js/
-        app.js                      # Flujo de la página (módulo ES)
+        app.js                      # Flujo de la página (solo navegador)
+        documents.js                # Dibuja la factura SII / OC desde los datos del ejemplo (solo navegador)
         validators.js               # Reglas determinísticas — compartido con el Worker
-        templates.js                # Textos de correo, fila de sistema, vistas Excel/JSON — compartido
-        catalog.js                  # Maestro demo: proveedores conocidos, reglas por cliente
-        config.js                   # Precios y valores por defecto de la calculadora (única fuente)
+        templates.js                # Correo, fila de sistema, respuesta de API — compartido
+        formato.js                  # Montos y fechas en formato chileno — compartido
+        catalog.js                  # Empresa ficticia, maestro de proveedores, historial — compartido
       samples/
-        factura-ok.html             # Documento renderizado en HTML (se muestra y se resalta)
-        factura-ok.pdf              # Mismo documento en PDF (entrada del pipeline real)
-        factura-ok.json             # Resultado precalculado
-        ...                         # Igual para los otros 3 ejemplos
+        factura-ok.json             # "documento" (lo impreso) + "extraccion" (lo que lee la IA)
+        factura-sin-oc.json
+        factura-montos.json
+        orden-compra.json
 src/                                # Worker (Fase 2); fuera de public/, no se publica
   worker.js                         # Router de /api/demo/*
   extract.js                        # Llamada a la API de Anthropic
@@ -156,7 +157,6 @@ package.json                        # Solo @anthropic-ai/sdk (Fase 2)
 ```
 
 - El Worker importa los módulos compartidos con ruta relativa (`../public/automatizacion-ia/demo/js/validators.js`). Esos módulos no pueden usar APIs exclusivas del navegador ni del Worker.
-- Los precios de la landing siguen escritos en su HTML; `config.js` es la fuente para la demo. Si cambian, se actualizan ambos (anotarlo en CLAUDE.md).
 
 ---
 
@@ -241,8 +241,8 @@ Todos **sintéticos**, en formato de factura electrónica chilena (SII): RUT con
 | `factura-montos` | #5 IVA que no cuadra | ⚠ `review` |
 | `orden-compra` | #6 Otro tipo de documento | ✓ `valid` |
 
-- Cada ejemplo existe como **HTML** (lo que se muestra, con zonas marcadas para resaltar cada campo cuando aparece) y como **PDF** exportado de ese HTML (entrada del pipeline real).
-- Cada `.json` guarda la extracción y su fecha de referencia. En la Fase 1 se escriben a mano; en la Fase 2 se regeneran corriendo el pipeline real sobre los PDF y se comparan con los escritos a mano.
+- Cada ejemplo es un `.json` con dos partes: `documento` (lo que está impreso) y `extraccion` (lo que lee la IA, en el contrato de §7). `documents.js` dibuja el documento a partir de `documento`, con cada zona marcada (`data-f`) para resaltarla cuando aparece su campo. Para obtener el **PDF** que usará el pipeline real en la Fase 2, basta abrir el ejemplo en la demo e imprimir a PDF: la hoja de estilos de impresión deja solo el documento.
+- Cada `.json` guarda además su fecha de referencia (`fechaReferencia`). En la Fase 1 la extracción se escribió a mano; en la Fase 2 se regeneran corriendo el pipeline real sobre los PDF y se comparan con los escritos a mano.
 - Los ejemplos son también el **plan B** si falla la API o la red en una reunión: la página carga todos los `.json` al abrirse, así que una vez abierta funciona sin conexión.
 - Opcional en la Fase 2: una factura fotografiada (escenario #3), para anticipar la objeción "mis documentos son escaneados". Solo si el pipeline real la procesa bien.
 
@@ -256,8 +256,7 @@ Flujo en pasos, pensado para mostrarse en un notebook y verse bien en móvil. Es
 2. **Lectura:** documento a la izquierda, campos a la derecha. En los ejemplos, los campos aparecen uno a uno (~400 ms) y se resalta la zona del documento correspondiente (plan_landing §5.3). En documento propio se muestra el archivo (visor PDF del navegador o `<img>`) sin resaltado, con indicador de progreso mientras llega la respuesta.
 3. **Validación:** lista de checks con su estado; el estado del documento destacado. Si es `review`: *"Este caso pasa a revisión humana. Tu equipo revisa solo las excepciones."*
 4. **Salidas:** pestañas Correo (vista previa; campo "Enviar a" y botón **Enviar** desde la Fase 3), Sistema (tabla con la fila nueva resaltada), Excel y JSON.
-5. **Impacto:** calculadora.
-6. **Cierre:** CTA de WhatsApp inmediatamente debajo del resultado, con `(ref: demo)`, y botón "Probar otro ejemplo".
+5. **Cierre:** CTA de WhatsApp inmediatamente debajo del resultado, con `(ref: demo)`, y botón "Probar otro ejemplo".
 
 Además:
 - Respetar `prefers-reduced-motion`: mostrar el resultado completo sin animación.
@@ -268,36 +267,11 @@ Además:
 
 ---
 
-## 11. Calculadora de ahorro
+## 11. Calculadora de ahorro — descartada
 
-La calculadora tiene que servir para **calificar** al prospecto, no solo para convencerlo. Con los precios actuales, la mantención mensual pesa mucho en volúmenes bajos:
+Se construyó en la Fase 1 y se quitó el 2026-09-29: un cálculo genérico, con supuestos que el visitante no controla del todo, puede desincentivar por error a un cliente que sí se beneficiaría. El impacto económico se conversa en la reunión, con el proceso real a la vista.
 
-> Con 300 documentos al mes, 4 minutos cada uno, $8.000 la hora y 80 % automatizable, el ahorro bruto es $128.000 y el neto (tras $120.000 de mantención) es **$8.000 al mes**: la implementación de $490.000 se recupera en **61 meses**.
-> Con 1.000 documentos al mes y los mismos supuestos, el neto es **$307.000 al mes** y se recupera en **1,6 meses**.
-
-Por eso:
-
-**Entradas** (valores por defecto en `config.js`, editables en la reunión):
-- Documentos por mes (defecto: **1.000**, un volumen típico de una oficina contable; ajustar cuando haya datos reales de prospectos)
-- Minutos por documento hoy (defecto: 4)
-- Costo hora del personal, costo empresa (defecto: $8.000)
-- % automatizable (defecto: 80 %)
-- Plan: Básica ($490.000) o Integrada ($790.000)
-
-**Salidas:**
-- Horas al mes dedicadas hoy = docs × min / 60
-- Costo mensual actual = horas × costo hora
-- Ahorro mensual bruto = costo mensual × % automatizable
-- Ahorro mensual neto = ahorro bruto − mantención ($120.000)
-- Meses de retorno = implementación / ahorro neto
-- Horas liberadas al año
-- **Volumen de equilibrio:** documentos al mes a partir de los cuales el ahorro cubre la mantención = mantención / (min / 60 × costo hora × % automatizable)
-
-**Mensajes honestos:**
-- Ahorro neto ≤ 0: *"Con este volumen, la mantención supera el ahorro. Conviene partir por un proceso con más documentos."*
-- Retorno > 12 meses: *"El retorno es lento con este volumen. Veamos si hay otro proceso con más carga."*
-
-Todos los precios se leen de `config.js`. La relación entre volumen y mantención es una señal comercial que conviene revisar aparte de la demo (¿plan de mantención más barato para volúmenes bajos?).
+Queda como referencia interna, no para mostrar: con los precios actuales ($180.000 de mantención), 4 minutos por documento, $8.000 la hora y 80 % automatizable, el ahorro cubre la mantención a partir de unos **420 documentos al mes**. Es un dato útil para priorizar prospectos y para revisar la estructura de precios, no un argumento de venta.
 
 ---
 
@@ -402,20 +376,20 @@ Regla para las fases siguientes: **nada que no deba ser público va dentro de `p
 
 ### Fase 0: Protección del repo y alineación de documentos
 - [x] Sitio movido a `public/` con `assets.directory: "./public"`; en local, las páginas y las imágenes responden 200 y `/.git/config`, `/docs/…`, `/CLAUDE.md`, `/wrangler.jsonc` responden 404.
-- [ ] Lo mismo verificado en producción después de `wrangler deploy`.
+- [x] Lo mismo verificado en producción después de `wrangler deploy` (2026-09-29).
 - [x] plan_landing §5, §6 y §10 actualizados para apuntar a este plan (Nivel 1 → Fase 1 de este plan; Nivel 2 público → postergado).
 - [x] RUT de todos los ejemplos verificados con `validarRut`.
 
 ### Fase 1: Demo con ejemplos (sin backend)
-- [ ] `/automatizacion-ia/demo/` publicada, con los 4 ejemplos recorriendo el flujo completo desde sus `.json`.
-- [ ] `validators.js` se ejecuta en el navegador sobre los ejemplos, con la fecha de referencia de cada uno.
-- [ ] Resaltado sincronizado documento ↔ campo; campo en ámbar en `factura-sin-oc` y `factura-montos`.
-- [ ] Vista previa de correo, tabla de sistema, vistas Excel y JSON.
-- [ ] Calculadora con volumen de equilibrio y mensajes honestos.
-- [ ] CTA de WhatsApp bajo el resultado con `(ref: demo)`.
-- [ ] Eventos vía `window.thTrack` (§16).
-- [ ] Sección `#demo` en la landing; botón secundario del hero apunta a `#demo`.
-- [ ] `prefers-reduced-motion` respetado; probado en notebook y en un móvil real.
+- [x] `/automatizacion-ia/demo/` construida (falta publicarla), con los 4 ejemplos recorriendo el flujo completo desde sus `.json`.
+- [x] `validators.js` se ejecuta en el navegador sobre los ejemplos, con la fecha de referencia de cada uno.
+- [x] Resaltado sincronizado documento ↔ campo; campo en ámbar en `factura-sin-oc` y `factura-montos`.
+- [x] Vista previa de correo, tabla de sistema, vistas Excel y JSON.
+- [x] CTA de WhatsApp bajo el resultado con `(ref: demo)`.
+- [x] Eventos vía `window.thTrack` (§16).
+- [x] Sección `#demo` en la landing; botón secundario del hero apunta a `#demo`.
+- [x] `prefers-reduced-motion` respetado; probado en navegador a 1366 px y a 390 px (móvil emulado).
+- [ ] Probado en un móvil real.
 - [ ] Funciona sin conexión una vez cargada (probar cortando la red).
 
 > Al terminar esta fase la demo ya se puede usar en reuniones y está publicada para el público.
@@ -457,7 +431,6 @@ Siguiendo [../CLAUDE.md](../CLAUDE.md): el `(ref: …)` de cada enlace de WhatsA
 | `ver_demo` | Clic en "Ver la demo" en la landing | `landing_demo` / `hero` |
 | `demo_iniciada` | Se elige un ejemplo | `{ sample }` |
 | `demo_completada` | Se llega a la validación | `{ sample, status }` |
-| `demo_calculadora` | Se modifica un valor de la calculadora (una vez por visita) | — |
 | `demo_real_iniciada` / `demo_real_completada` / `demo_real_error` | Modo en vivo (Fase 2) | `{ docType, status }` o `{ code }` |
 | `demo_correo_enviado` | Fase 3 | — |
 | `cta_whatsapp` | CTA bajo el resultado | `demo` |
@@ -472,6 +445,6 @@ Usar `data-ev` / `data-ev-loc` en los clics y `window.thTrack(name, props)` para
 2. **Caso feliz (1 min):** `factura-ok`, o un documento que el prospecto haya enviado antes, en modo en vivo. Extracción y checks en verde.
 3. **Caso con excepción (1 min):** `factura-sin-oc` o `factura-montos`. Remarcar: "El sistema no adivina; esto lo revisa una persona. Tu equipo revisa solo las excepciones."
 4. **Salidas (1 min):** mostrar la fila en el sistema; pedir el correo del prospecto y enviarle el resumen en vivo (desde la Fase 3).
-5. **Impacto (1,5 min):** calculadora con sus números reales. Si el volumen no alcanza el equilibrio, decirlo y buscar otro proceso. Cerrar con la propuesta: *"Mándanos 20 de tus documentos reales y te mostramos el resultado."*
+5. **Su proceso (1,5 min):** preguntar cuántos documentos procesan al mes, cuánto tiempo les toma y dónde tiene que terminar la información. Cerrar con la propuesta: *"Mándanos 20 de tus documentos reales y te mostramos el resultado."*
 
 Antes de la reunión: pedir 2 o 3 documentos reales, probarlos con anticipación y dejar la página abierta (así los ejemplos funcionan aunque falle la red).

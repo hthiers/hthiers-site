@@ -1,0 +1,35 @@
+{
+  "id": "factura-ok",
+  "titulo": "Factura correcta",
+  "descripcion": "Todos los datos presentes y cuadrados.",
+  "fechaReferencia": "2026-09-18",
+  "documento": {
+    "tipo": "invoice",
+    "emisor": { "name": "Insumos Norte S.A.", "tax_id": "96.512.340-7", "giro": "Venta al por mayor de insumos industriales", "direccion": "Av. Grecia 1840, Antofagasta" },
+    "receptor": { "name": "Comercial Los Aromos SpA", "tax_id": "77.890.123-4", "giro": "Comercio al por mayor", "direccion": "Los Aromos 455, Santiago" },
+    "folio": "3102",
+    "sii": "S.I.I. - ANTOFAGASTA",
+    "fecha_emision": "2026-09-12",
+    "fecha_vencimiento": "2026-10-12",
+    "condicion_pago": "Crédito 30 días",
+    "referencias": [{ "tipo": "Orden de compra", "numero": "4518", "fecha": "2026-09-05" }],
+    "items": [
+      { "descripcion": "Guantes de nitrilo, caja x100", "cantidad": 20, "precio": 6490 },
+      { "descripcion": "Mascarilla KN95, caja x20", "cantidad": 10, "precio": 8990 },
+      { "descripcion": "Alcohol gel 1 L", "cantidad": 12, "precio": 2700 }
+    ],
+    "neto": 252100,
+    "iva": 47899,
+    "total": 299999
+  },
+  "extraccion": {
+    "document_type": "invoice",
+    "document_number": "3102",
+    "issue_date": "2026-09-12",
+    "due_date": "2026-10-12",
+    "purchase_order_number": "4518",
+    "supplier": { "name": "Insumos Norte S.A.", "tax_id": "96.512.340-7" },
+    "currency": "CLP",
+    "amounts": { "net": 252100, "tax": 47899, "total": 299999 }
+  }
+}

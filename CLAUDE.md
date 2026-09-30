@@ -21,7 +21,8 @@ wrangler deploy
 ## Architecture
 
 - **[public/index.html](public/index.html)** — the home page; embedded CSS, no external dependencies
-- **[public/automatizacion-ia/index.html](public/automatizacion-ia/index.html)** — landing page for the AI automation service. Embedded CSS plus one inline `<script>` at the end of `<body>` that records conversion events (see below). Content is driven by [docs/landing_page_automatizacion_IA.md](docs/landing_page_automatizacion_IA.md); the execution plan is [docs/plan_landing_y_mvp_demo.md](docs/plan_landing_y_mvp_demo.md)
+- **[public/automatizacion-ia/index.html](public/automatizacion-ia/index.html)** — landing page for the AI automation service. Embedded CSS; loads the shared [public/js/th-track.js](public/js/th-track.js) plus a small inline `<script>` with its page-specific events (see below). Content is driven by [docs/landing_page_automatizacion_IA.md](docs/landing_page_automatizacion_IA.md); the execution plan is [docs/plan_landing_y_mvp_demo.md](docs/plan_landing_y_mvp_demo.md). Its `#demo` section links to the demo.
+- **[public/automatizacion-ia/demo/](public/automatizacion-ia/demo/)** — the demo: pick a sample document, watch it being read and validated, and see the outputs. Plan: [docs/plan-demo-automatizacion-ia.md](docs/plan-demo-automatizacion-ia.md). The page has embedded CSS like the rest of the site, plus plain ES modules in `demo/js/` (no build). `validators.js`, `templates.js`, `formato.js` and `catalog.js` must stay free of DOM and Worker APIs: the Worker of the demo's Phase 2 will import them. Samples are JSON in `demo/samples/`. **The landing's prices are hardcoded in its HTML in three places (price cards, the FAQ answer and the JSON-LD `offers`): a price change means updating all three.**
 - **[public/privacidad/index.html](public/privacidad/index.html)** — privacy and data-handling page, linked from the landing footer
 - **[wrangler.jsonc](wrangler.jsonc)** — Cloudflare Workers config; serves assets from `public/`
 
@@ -48,15 +49,15 @@ new `wa.me` link.**
 
 ### The event instrumentation is present but dormant
 
-The landing page carries an inline `<script>` that is deliberately **provider-agnostic**: it sends
+[public/js/th-track.js](public/js/th-track.js), loaded by the landing and the demo, is deliberately **provider-agnostic**: it sends
 events to `window.zaraz.track` or `window.gtag` if either is loaded, and otherwise queues them.
 No provider is loaded, so **nothing is recorded right now** — that is expected, not a bug. It stays in
 place so the page does not have to be re-instrumented when a destination is eventually connected.
 
 - Clickable elements are instrumented by adding `data-ev="<event>"` and `data-ev-loc="<section>"`. The click handler is delegated, so new CTAs need no JS changes.
-- Events implemented: `cta_whatsapp` (the primary conversion metric), `cta_email`, `ver_como_funciona`, `scroll_precios`, `faq_abierta`.
+- Events implemented: `cta_whatsapp` (the primary conversion metric), `cta_email`, `ver_como_funciona`, `ver_demo`, `scroll_precios`, `faq_abierta` (landing); `demo_iniciada`, `demo_completada` (demo).
 - UTM parameters and the referrer are captured and attached to every event — but with no destination connected they are not stored anywhere. Traffic source is read from the Web Analytics *Referer* dimension instead.
-- `window.thTrack(name, props)` is exposed for future sections (the demo in Phase 2) to record their own events.
+- `window.thTrack(name, props)` is exposed so pages record their own non-click events (the landing's inline script and the demo's `app.js` use it).
 
 Connecting a destination is a Phase 3 / paid-campaign decision: either GA4 via Zaraz, or a
 self-hosted events endpoint on the Worker that Phase 3 introduces.

@@ -611,6 +611,63 @@
             line-height: 1.6;
         }
 
+        /* ── Demo (teaser: la demo completa vive en /automatizacion-ia/demo/) ── */
+        .demo-teaser {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .demo-teaser .lead { margin-bottom: 24px; }
+
+        .demo-teaser .note {
+            margin-top: 14px;
+            font-size: 9pt;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .demo-card {
+            padding: 22px;
+            background: #1e293b60;
+            border: 1px solid #1e293b;
+            border-radius: 14px;
+        }
+
+        .demo-card-head {
+            font-size: 9pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #64748b;
+            margin-bottom: 14px;
+        }
+
+        .demo-card-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 14px;
+        }
+
+        .demo-card ul { list-style: none; }
+
+        .demo-card li {
+            display: flex;
+            gap: 10px;
+            padding: 8px 0;
+            border-top: 1px solid #1e293b;
+            font-size: 10pt;
+            line-height: 1.45;
+            color: #cbd5e1;
+        }
+
+        .demo-card li .ok { color: #38bdf8; font-weight: 700; }
+
+        .demo-card li.review { color: #fbbf24; font-weight: 600; }
+        .demo-card li.review .ok { color: #f59e0b; }
+
         /* ── Primeros casos (prueba social honesta) ── */
         .early-box {
             padding: 32px;
@@ -808,6 +865,7 @@
             .pricing-grid { grid-template-columns: 1fr 1fr; }
             .experience-box { flex-direction: column; }
             .ba-grid { grid-template-columns: 1fr; }
+            .demo-teaser { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 480px) {
@@ -838,7 +896,7 @@
                     <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso%20%28ref%3A%20hero%29" target="_blank" rel="noopener noreferrer" class="btn-primary" data-ev="cta_whatsapp" data-ev-loc="hero">
                         Solicita un diagnóstico gratuito
                     </a>
-                    <a href="#antes-despues" class="btn-secondary" data-ev="ver_como_funciona" data-ev-loc="hero">Ver cómo funciona</a>
+                    <a href="#demo" class="btn-secondary" data-ev="ver_como_funciona" data-ev-loc="hero">Ver cómo funciona</a>
                 </div>
 
                 <p class="support">Analizamos uno de tus procesos actuales y te mostramos qué partes pueden automatizarse, cuánto trabajo puedes ahorrar y qué solución necesitas.</p>
@@ -950,6 +1008,29 @@
             </div>
 
             <p class="ba-quote">Lo que antes requería minutos de trabajo por documento puede convertirse en un proceso automático.</p>
+        </div>
+
+        <!-- ── Demo (la demo completa está en /automatizacion-ia/demo/) ── -->
+        <div class="section" id="demo">
+            <p class="section-label">Demo</p>
+            <div class="demo-teaser">
+                <div>
+                    <h2>Míralo funcionando</h2>
+                    <p class="lead">Elige un documento de ejemplo y mira cómo se lee, cómo el software valida cada dato y cómo queda listo para tu sistema. También verás qué pasa cuando algo no cuadra.</p>
+                    <a href="/automatizacion-ia/demo/" class="btn-secondary" data-ev="ver_demo" data-ev-loc="landing_demo">Ver la demo →</a>
+                    <p class="note">Usa documentos de ejemplo. Con tus documentos, los campos y las reglas se adaptan a tu proceso.</p>
+                </div>
+                <div class="demo-card" aria-hidden="true">
+                    <p class="demo-card-head">Validación automática</p>
+                    <p class="demo-card-title">Factura 12345 · Distribuidora Andina SpA</p>
+                    <ul>
+                        <li><span class="ok">✓</span> RUT del proveedor válido</li>
+                        <li><span class="ok">✓</span> IVA corresponde al 19 % del neto</li>
+                        <li><span class="ok">✓</span> Total consistente con neto más IVA</li>
+                        <li class="review"><span class="ok">⚠</span> Falta la orden de compra: pasa a revisión humana</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <!-- ── Qué podemos automatizar ── -->
@@ -1218,82 +1299,14 @@
 
     </div>
 
+    <script src="/js/th-track.js"></script>
     <script>
-    /*
-     * Instrumentación de conversiones — puesta, pero dormida a propósito.
-     *
-     * Hoy NO hay proveedor conectado, así que no se registra nada: es lo esperado,
-     * no un error. La medición actual es Cloudflare Web Analytics (visitas) más el
-     * recuento manual de conversaciones de WhatsApp, atribuidas por el "(ref: ...)"
-     * que viaja en el texto de cada enlace wa.me.
-     *
-     * Este código queda para no tener que reinstrumentar la página más adelante:
-     * entrega a zaraz.track o a gtag si alguno se carga, y si no, encola. Conectar
-     * un destino es una decisión de la Fase 3 / campañas pagadas.
-     *
-     * El razonamiento completo: docs/plan_landing_y_mvp_demo.md §4.1
-     */
+    // Eventos propios de la landing. La instrumentación común (window.thTrack y los
+    // clics con data-ev) está en /js/th-track.js; hoy no hay destino conectado.
     (function () {
         'use strict';
 
-        var queue = [];
-        var origen = null;
-
-        // Origen del visitante: se adjunta a cada evento para poder atribuir.
-        try {
-            var qs = new URLSearchParams(window.location.search);
-            var utm = {};
-            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(function (k) {
-                if (qs.get(k)) { utm[k] = qs.get(k); }
-            });
-            if (!Object.keys(utm).length && document.referrer) {
-                try { utm.referrer = new URL(document.referrer).hostname; } catch (e) {}
-            }
-            if (Object.keys(utm).length) { origen = utm; }
-        } catch (e) {}
-
-        function entregar(nombre, props) {
-            if (window.zaraz && typeof window.zaraz.track === 'function') {
-                window.zaraz.track(nombre, props);
-                return true;
-            }
-            if (typeof window.gtag === 'function') {
-                window.gtag('event', nombre, props);
-                return true;
-            }
-            return false;
-        }
-
-        function vaciarCola() {
-            while (queue.length) {
-                if (!entregar(queue[0][0], queue[0][1])) { return; }
-                queue.shift();
-            }
-        }
-
-        function track(nombre, props) {
-            props = props || {};
-            if (origen) {
-                for (var k in origen) { if (!(k in props)) { props[k] = origen[k]; } }
-            }
-            vaciarCola();
-            if (!entregar(nombre, props)) {
-                queue.push([nombre, props]);
-                if (queue.length > 50) { queue.shift(); }
-            }
-        }
-
-        // Expuesto para que la demo (Fase 2) registre sus propios eventos.
-        window.thTrack = track;
-
-        // Clicks: cualquier elemento con data-ev.
-        document.addEventListener('click', function (ev) {
-            var el = ev.target.closest('[data-ev]');
-            if (!el) { return; }
-            track(el.getAttribute('data-ev'), {
-                ubicacion: el.getAttribute('data-ev-loc') || 'sin-ubicacion'
-            });
-        });
+        var track = window.thTrack;
 
         // ¿Llegan a ver el precio, o abandonan antes?
         var precios = document.getElementById('precios');
