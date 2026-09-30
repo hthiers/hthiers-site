@@ -28,7 +28,7 @@ etiquetas y sin cookies. El detalle y el razonamiento están en §4.1.
 
 ## 1. Estado actual (auditoría)
 
-Archivo: [../automatizacion-ia/index.html](../automatizacion-ia/index.html) — 34 KB, HTML+CSS embebido, sin JavaScript.
+Archivo: [../public/automatizacion-ia/index.html](../public/automatizacion-ia/index.html) — 34 KB, HTML+CSS embebido, sin JavaScript.
 
 ### Lo que ya está implementado y funciona
 - Estructura completa según §24 del documento base (Hero → Problema → Solución → Alcance → Integraciones → Cómo funciona → Experiencia → Precios → FAQ → Cierre).
@@ -50,7 +50,7 @@ Archivo: [../automatizacion-ia/index.html](../automatizacion-ia/index.html) — 
 | §35 Demo/ejemplo de factura en el MVP de la landing | **Falta** |
 
 ### Restricción técnica a considerar
-`wrangler.jsonc` hoy declara únicamente `assets.directory: "."` y **no tiene `main`**. Es un Worker de assets estáticos puro. Cualquier endpoint de backend (el upload del Nivel 2) exige agregar un script Worker y configurar el routing — ver §6.3.
+`wrangler.jsonc` declaraba únicamente `assets.directory: "."` (hoy `"./public"`) y **no tiene `main`**. Es un Worker de assets estáticos puro. Cualquier endpoint de backend (el upload del Nivel 2) exige agregar un script Worker y configurar el routing — ver §6.3.
 
 ---
 
@@ -80,7 +80,7 @@ Ventajas: es concreto, tiene costo marginal casi nulo, quien acepta ya está cal
 Mantener §31 del documento base: precio especial a los 2–3 primeros a cambio de autorización para publicar el caso.
 
 ### 2.3 Definir el alcance real del MVP
-Los documentos [MVP_Demo_Automatizacion_Inteligente_Documentos.md](MVP_Demo_Automatizacion_Inteligente_Documentos.md) y [mvp_demo_automatizacion_documentos_ia.md](mvp_demo_automatizacion_documentos_ia.md) describen prácticamente el mismo producto (conviene fusionarlos en uno solo): upload → IA → validación → corrección → exportación → integración, con login y persistencia.
+Los dos documentos originales del MVP — hoy fusionados en [mvp_demo.md](mvp_demo.md) — describían prácticamente el mismo producto: upload → IA → validación → corrección → exportación → integración, con login y persistencia.
 
 Eso está sobre-dimensionado como pieza de conversión y tiene riesgos concretos:
 - Un prospecto sube una factura real con RUT y montos → responsabilidad sobre datos de terceros.
@@ -94,6 +94,8 @@ Eso está sobre-dimensionado como pieza de conversión y tiene riesgos concretos
 | **1** | Demo guiada, sin backend, sin IA real, embebida en la landing | Nulo | Semana 1 |
 | **2** | Upload real del documento del visitante, con captura de email | Medio (controlado) | Semanas 3–4 |
 | **3** | App completa con login, correcciones persistidas, integraciones | Alto | **No construir hasta tener cliente pagando** |
+
+> **Actualización 2026-09-28:** los Niveles 1 y 2 quedaron redefinidos en [plan-demo-automatizacion-ia.md](plan-demo-automatizacion-ia.md). El Nivel 1 pasa a ser el modo "ejemplos" de una página propia, `/automatizacion-ia/demo/`, pública y enlazada desde una sección `#demo` de la landing. El Nivel 2 público (upload con captura de lead) se **posterga**; en su lugar, la misma página procesa documentos propios en vivo, solo con código de acceso, para usar en reuniones. El Nivel 3 no cambia.
 
 ---
 
@@ -274,6 +276,8 @@ etiquetas. Se reevalúa al llegar a las campañas pagadas (§7.4).
 
 ## 5. FASE 2 — MVP Demo Nivel 1: demo guiada (~1 día)
 
+> **Reemplazada por [plan-demo-automatizacion-ia.md](plan-demo-automatizacion-ia.md) (Fase 1 de ese plan).** Cambios principales: la demo vive en su propia página `/automatizacion-ia/demo/` y la landing solo lleva una sección `#demo` que enlaza a ella (misma ubicación que §5.2); los tipos de documento son 3 facturas y 1 orden de compra (sin guía de despacho). Se conservan de esta sección: la declaración honesta de simulación, el resaltado sincronizado, el campo en ámbar, el formato SII, `prefers-reduced-motion` y el CTA de WhatsApp bajo el resultado. Se deja el texto original como referencia.
+
 ### 5.1 Qué es
 Una simulación embebida en la landing que muestra el flujo completo **sin backend, sin upload y sin IA real**. Todo el contenido está precargado en el HTML.
 
@@ -296,7 +300,7 @@ Esa segunda línea es obligatoria: declara honestamente que es una simulación. 
 ┌────────────────────────┐   ┌─────────────────────────────┐
 │                        │   │  Extrayendo información...  │
 │   Documento de         │   │                             │
-│   ejemplo renderizado  │ → │  RUT emisor      76.543.210-K│
+│   ejemplo renderizado  │ → │  RUT emisor      76.123.456-0│
 │   (SVG/HTML, no PNG)   │   │  Razón social    ...         │
 │                        │   │  Folio           ...         │
 │   [campo resaltado     │   │  Fecha           ...         │
@@ -322,7 +326,7 @@ Esa segunda línea es obligatoria: declara honestamente que es una simulación. 
 - **Botón de repetir** al terminar, y **CTA de WhatsApp inmediatamente debajo** del resultado: es el punto de máxima convicción de toda la página.
 
 ### 5.5 Implementación
-Todo en [../automatizacion-ia/index.html](../automatizacion-ia/index.html): un bloque de CSS adicional, el marcado de la sección, y ~60 líneas de JS con los datos de los 3 documentos en una constante. Sin dependencias, sin build, coherente con el resto del sitio y con [../CLAUDE.md](../CLAUDE.md).
+Todo en [../public/automatizacion-ia/index.html](../public/automatizacion-ia/index.html): un bloque de CSS adicional, el marcado de la sección, y ~60 líneas de JS con los datos de los 3 documentos en una constante. Sin dependencias, sin build, coherente con el resto del sitio y con [../CLAUDE.md](../CLAUDE.md).
 
 ### 5.6 Checklist Fase 2
 - [ ] Datos de los 3 documentos de ejemplo (formato chileno verificado)
@@ -339,6 +343,8 @@ Todo en [../automatizacion-ia/index.html](../automatizacion-ia/index.html): un b
 ---
 
 ## 6. FASE 3 — MVP Demo Nivel 2: procesamiento real con captura de lead (2–3 semanas)
+
+> **Postergada.** El procesamiento real se implementa primero como modo en vivo protegido con código de acceso, para reuniones: ver [plan-demo-automatizacion-ia.md](plan-demo-automatizacion-ia.md) §12–§14 y su Fase 2. Sin upload público no hacen falta Turnstile, R2 ni captura de lead. Esta sección se retoma, sobre ese mismo Worker, cuando las métricas (§8) justifiquen abrir el upload al público. Donde difieran, manda el plan de la demo (correo con Cloudflare Email Service; modelo configurable por `ANTHROPIC_MODEL`).
 
 ### 6.1 El concepto clave
 El visitante sube **su propio documento** y recibe el resultado **por correo**. Eso significa que el upload exige email + empresa:
@@ -385,8 +391,8 @@ Borrado automático del archivo a las 24 h
 
 - **Modelo:** `claude-opus-5`. Entrada: bloque `document` (PDF en base64) o `image` (JPG/PNG). Salida: **structured outputs** (`output_config.format`) con el esquema de campos — no parsear texto libre.
 - **Precio de referencia:** $5 por millón de tokens de entrada y $25 por millón de salida. Una factura de una página es del orden de unos pocos miles de tokens de entrada y unos cientos de salida: **el costo por demo es de centavos de dólar.** Con rate limiting de 3/IP/día, el riesgo económico es despreciable — no hay razón para degradar el modelo y arriesgar una extracción mediocre en la pieza que debe generar confianza.
-- **Campos a extraer:** los mismos del Nivel 1, para que la experiencia sea coherente.
-- **Confianza y excepciones:** pedir en el esquema un campo de confianza por dato, y marcar en ámbar todo lo que quede bajo el umbral o no se encuentre. Igual que en el Nivel 1 — es la parte honesta y la que diferencia.
+- **Campos a extraer:** el contrato de extracción de [mvp_demo.md §4](mvp_demo.md), el mismo del Nivel 1, para que la experiencia sea coherente.
+- **Excepciones sin confianza autodeclarada:** no pedirle a la IA que declare su confianza por campo — ese número no está calibrado y da una precisión falsa. El ámbar sale de hechos verificables: un campo en `null`, o una regla determinística que falla (dígito verificador, `neto + IVA = total`, fecha). Ver [mvp_demo.md §5](mvp_demo.md). Igual que en el Nivel 1 — es la parte honesta y la que diferencia.
 - **Manejo de errores:** si la extracción falla o el documento no es procesable, **no** mostrar un error técnico. Mostrar: *"Este documento necesita una revisión manual. Te escribimos para ver de qué se trata."* Un error crudo en la demo hace más daño que no tener demo.
 
 ### 6.5 Privacidad — condición de entrada, no un detalle
@@ -518,9 +524,9 @@ concreta, ese es el momento de conectar un destino — no antes.
 1. **Decidir el vertical** (§2.1) — bloquea el copy de todo lo demás.
 2. **Fase 1 completa** (§4) — 1 día. Sin esto no hay datos.
 3. **Arrancar prospección manual** (§7.2) — en paralelo, desde ya.
-4. **Fase 2, demo Nivel 1** (§5) — 1 día.
+4. **Demo con ejemplos** — Fases 0 y 1 de [plan-demo-automatizacion-ia.md](plan-demo-automatizacion-ia.md) (reemplaza a §5).
 5. **Landing del vertical** con el copy específico — medio día.
-6. **Fase 3, MVP Nivel 2** (§6) — 2–3 semanas.
+6. **Demo en vivo para reuniones** — Fases 2 y 3 de [plan-demo-automatizacion-ia.md](plan-demo-automatizacion-ia.md). El Nivel 2 público (§6) queda postergado.
 7. **LinkedIn orgánico** desde la semana 2.
 8. **Revisión de métricas** a las 4 semanas (§8).
 9. **Campaña pagada** solo si se cumplen las precondiciones (§7.4).
@@ -530,6 +536,9 @@ concreta, ese es el momento de conectar un destino — no antes.
 ---
 
 ## 11. Tareas de mantención documental
-- [ ] Fusionar [MVP_Demo_Automatizacion_Inteligente_Documentos.md](MVP_Demo_Automatizacion_Inteligente_Documentos.md) y [mvp_demo_automatizacion_documentos_ia.md](mvp_demo_automatizacion_documentos_ia.md) en un solo documento; hoy describen casi lo mismo.
-- [ ] Marcar en ese documento fusionado qué corresponde a Nivel 1, Nivel 2 y Nivel 3 según §2.3 de este plan.
-- [ ] Actualizar [../CLAUDE.md](../CLAUDE.md) cuando el sitio deje de ser solo assets estáticos (Fase 3): dejará de ser cierto que no hay JavaScript ni backend.
+- [x] Fusionar los dos documentos del MVP en [mvp_demo.md](mvp_demo.md). Los originales quedan en [_archivo/](_archivo/); la tabla de decisiones de la fusión está en su §0.
+- [x] Marcar en el documento fusionado qué corresponde a Nivel 1, Nivel 2 y Nivel 3.
+- [x] Corregir los RUT de ejemplo: `76.123.456-7` (documentos originales) y `76.543.210-K` (este plan, §5.3) tenían dígito verificador inválido.
+- [ ] Actualizar [../CLAUDE.md](../CLAUDE.md) cuando el sitio deje de ser solo assets estáticos (Fase 2 de [plan-demo-automatizacion-ia.md](plan-demo-automatizacion-ia.md)): dejará de ser cierto que no hay backend ni dependencias.
+- [x] Alinear §2.3, §5, §6 y §10 con [plan-demo-automatizacion-ia.md](plan-demo-automatizacion-ia.md) (2026-09-28).
+- [x] Dejar de publicar el repo completo: con `assets.directory: "."` se publicaban `.git/`, `docs/` y `CLAUDE.md`. El sitio se movió a `public/` y `assets.directory` es `"./public"`.
