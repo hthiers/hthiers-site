@@ -7,154 +7,268 @@
     <meta name="description" content="Cómo se tratan los datos personales y los documentos compartidos en thiers.cl.">
     <meta name="robots" content="noindex, follow">
     <link rel="canonical" href="https://thiers.cl/privacidad/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* Design system del sitio: ver docs/design-system.md */
+        :root {
+            --bg: #faf8f3;
+            --surface: #f0ede4;
+            --ink: #1b1a17;
+            --ink-2: #57544c;
+            --ink-3: #8c887d;
+            --line: #e2ded3;
+            --accent: #2f5d50;
+            --tint-1: #e4e9e1;
+            --serif: 'Newsreader', Georgia, serif;
+            --sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #0f172a;
-            color: #f1f5f9;
-            background-image: radial-gradient(ellipse 80% 60% at 10% 0%, #1e3a5f55 0%, transparent 60%);
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 17px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
+
+        a { color: inherit; text-decoration: none; }
 
         .wrap {
-            max-width: 760px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 40px;
         }
 
-        .topbar {
+        /* ── Navegación ── */
+        .nav {
             display: flex;
             align-items: center;
-            padding: 28px 0;
+            justify-content: space-between;
+            height: 76px;
+        }
+
+        .brand {
+            font-family: var(--serif);
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: -0.01em;
         }
 
         .back-link {
-            font-size: 9.5pt;
-            color: #64748b;
-            text-decoration: none;
-            font-weight: 500;
+            font-size: 15px;
+            color: var(--ink-2);
+            transition: color 0.2s;
         }
 
-        .back-link:hover { color: #94a3b8; }
+        .back-link:hover { color: var(--ink); }
+
+        /* ── Encabezado ── */
+        .page-head {
+            padding: 96px 0 80px;
+        }
+
+        .eyebrow {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
 
         h1 {
-            font-size: 26pt;
-            font-weight: 800;
-            letter-spacing: -0.8px;
-            line-height: 1.2;
-            margin: 24px 0 12px;
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(44px, 6.2vw, 82px);
+            line-height: 1.04;
+            letter-spacing: -0.025em;
+            max-width: 14ch;
         }
 
         .updated {
-            font-size: 9pt;
-            color: #475569;
-            margin-bottom: 40px;
+            margin-top: 28px;
+            font-size: 15px;
+            color: var(--ink-3);
+        }
+
+        .intro {
+            margin-top: 28px;
+            max-width: 46ch;
+            font-size: 19px;
+            color: var(--ink-2);
+        }
+
+        /* ── Secciones ── */
+        .policy {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            padding: 48px 0;
+            border-top: 1px solid var(--line);
         }
 
         h2 {
-            font-size: 13pt;
-            font-weight: 700;
-            color: #38bdf8;
-            margin: 40px 0 12px;
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: 28px;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            max-width: 14ch;
         }
 
-        p, li {
-            font-size: 10.5pt;
-            line-height: 1.75;
-            color: #94a3b8;
+        .policy-body { max-width: 62ch; }
+
+        .policy-body p,
+        .policy-body li { color: var(--ink-2); }
+
+        .policy-body p { margin-bottom: 14px; }
+        .policy-body p:last-child { margin-bottom: 0; }
+
+        .policy-body ul { margin: 0 0 14px 20px; }
+        .policy-body li { margin-bottom: 6px; padding-left: 4px; }
+        .policy-body li::marker { color: var(--ink-3); }
+
+        .policy-body strong { color: var(--ink); font-weight: 600; }
+
+        .policy-body a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: var(--line);
+            transition: text-decoration-color 0.2s;
         }
 
-        p { margin-bottom: 14px; }
-
-        ul { margin: 0 0 14px 20px; }
-        li { margin-bottom: 6px; }
-
-        strong { color: #f1f5f9; }
-
-        a { color: #38bdf8; }
+        .policy-body a:hover { text-decoration-color: var(--accent); }
 
         .note {
-            padding: 20px 24px;
-            background: #1e293b60;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            margin-bottom: 14px;
+            padding: 32px;
+            background: var(--tint-1);
+            border-radius: 16px;
         }
 
-        .note p:last-child { margin-bottom: 0; }
+        .note ul:last-child { margin-bottom: 0; }
 
-        footer {
-            margin: 56px 0 48px;
-            padding-top: 24px;
-            border-top: 1px solid #1e293b;
-            font-size: 9pt;
-            color: #475569;
+        /* ── Pie ── */
+        .legal {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--line);
+            margin-top: 48px;
+            padding: 24px 0 40px;
+            font-size: 13px;
+            color: var(--ink-3);
+        }
+
+        .legal a:hover { color: var(--ink); }
+
+        @media (max-width: 760px) {
+            .wrap { padding: 0 16px; }
+            .page-head { padding: 64px 0 56px; }
+            .policy { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
+            h2 { max-width: none; }
+            .note { padding: 24px 20px; }
+            .legal { flex-direction: column; gap: 6px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="wrap">
+<div class="wrap">
 
-        <div class="topbar">
-            <a href="/" class="back-link">← Hernán Thiers</a>
-        </div>
+    <header class="nav">
+        <a class="brand" href="/">Hernán Thiers</a>
+        <a href="/" class="back-link">← Volver al inicio</a>
+    </header>
 
+    <div class="page-head">
+        <p class="eyebrow">Privacidad</p>
         <h1>Privacidad y tratamiento de datos</h1>
         <p class="updated">Última actualización: 16 de septiembre de 2026</p>
-
-        <p>Esta página explica qué datos se recogen en <strong>thiers.cl</strong>, con qué finalidad y durante cuánto tiempo se conservan. Está escrita para que se entienda, no para cubrir formalidades.</p>
-
-        <h2>Quién es responsable</h2>
-        <p>Hernán Thiers, consultor independiente en ingeniería de software y automatización, con domicilio en Chile. Cualquier consulta sobre esta página o sobre tus datos: <a href="mailto:hernan@thiers.cl">hernan@thiers.cl</a>.</p>
-
-        <h2>Qué datos se recogen en el sitio</h2>
-        <p>La navegación por el sitio genera estadísticas <strong>agregadas y anónimas</strong>: páginas vistas, secciones que se consultan y clicks sobre los botones de contacto. Sirven para saber qué partes del sitio resultan útiles y cuáles no.</p>
-        <ul>
-            <li>No se utilizan cookies publicitarias ni de seguimiento entre sitios.</li>
-            <li>No se construyen perfiles individuales de los visitantes.</li>
-            <li>No se vende ni se cede información a terceros con fines comerciales.</li>
-        </ul>
-
-        <h2>Datos que entregas al contactarnos</h2>
-        <p>Si escribes por WhatsApp o por correo, se conserva la información que compartas voluntariamente —nombre, empresa, medio de contacto y la descripción del proceso que quieres automatizar— con el único fin de responder tu consulta y preparar una eventual propuesta.</p>
-        <p>WhatsApp es un servicio operado por un tercero y se rige por sus propias condiciones. Si prefieres no usarlo, el correo electrónico está siempre disponible como alternativa.</p>
-
-        <h2>Documentos que compartes para una evaluación</h2>
-        <div class="note">
-            <p>Si en el marco de un diagnóstico nos envías documentos de tu empresa (facturas, órdenes de compra, formularios u otros):</p>
-            <ul>
-                <li>Se utilizan <strong>exclusivamente</strong> para evaluar y construir la automatización que solicitaste.</li>
-                <li><strong>No se comparten con terceros</strong> ni se utilizan para entrenar modelos de inteligencia artificial.</li>
-                <li>Se eliminan cuando termina la evaluación, o antes si tú lo pides.</li>
-                <li>Si necesitas un acuerdo de confidencialidad firmado antes de enviar nada, se firma sin costo.</li>
-            </ul>
-            <p>Recomendación práctica: para una primera evaluación suele bastar con documentos de prueba, o con los datos sensibles tachados.</p>
-        </div>
-
-        <h2>Proveedores tecnológicos</h2>
-        <p>El sitio está alojado en la infraestructura de <strong>Cloudflare</strong>, que procesa las solicitudes necesarias para servir las páginas y proteger el servicio. El correo electrónico se gestiona a través de proveedores de correo estándar.</p>
-        <p>Cuando el procesamiento de un documento involucre servicios de inteligencia artificial de terceros, se informará de manera explícita antes de enviarlo, indicando qué servicio se utiliza.</p>
-
-        <h2>Tus derechos</h2>
-        <p>De acuerdo con la normativa chilena sobre protección de datos personales, puedes solicitar en cualquier momento:</p>
-        <ul>
-            <li>Acceder a los datos que se tengan sobre ti.</li>
-            <li>Rectificarlos si están incorrectos o incompletos.</li>
-            <li>Solicitar su eliminación.</li>
-            <li>Oponerte a su tratamiento.</li>
-        </ul>
-        <p>Basta con escribir a <a href="mailto:hernan@thiers.cl">hernan@thiers.cl</a>. Se responde dentro de un plazo razonable y sin costo.</p>
-
-        <h2>Cambios en esta página</h2>
-        <p>Si el sitio incorpora nuevas funcionalidades que traten datos de otra forma —por ejemplo, una demostración que permita subir documentos directamente desde el navegador— esta página se actualizará <strong>antes</strong> de que esa funcionalidad esté disponible, y el cambio quedará reflejado en la fecha de actualización.</p>
-
-        <footer>
-            Thiers.cl Consultoría — <a href="/automatizacion-ia/">Automatización Inteligente de Documentos</a>
-        </footer>
-
+        <p class="intro">Esta página explica qué datos se recogen en <strong>thiers.cl</strong>, con qué finalidad y durante cuánto tiempo se conservan. Está escrita para que se entienda, no para cubrir formalidades.</p>
     </div>
+
+    <section class="policy">
+        <h2>Quién es responsable</h2>
+        <div class="policy-body">
+            <p>Hernán Thiers, consultor independiente en ingeniería de software y automatización, con domicilio en Chile. Cualquier consulta sobre esta página o sobre tus datos: <a href="mailto:hernan@thiers.cl">hernan@thiers.cl</a>.</p>
+        </div>
+    </section>
+
+    <section class="policy">
+        <h2>Qué datos se recogen en el sitio</h2>
+        <div class="policy-body">
+            <p>La navegación por el sitio genera estadísticas <strong>agregadas y anónimas</strong>: páginas vistas, secciones que se consultan y clicks sobre los botones de contacto. Sirven para saber qué partes del sitio resultan útiles y cuáles no.</p>
+            <ul>
+                <li>No se utilizan cookies publicitarias ni de seguimiento entre sitios.</li>
+                <li>No se construyen perfiles individuales de los visitantes.</li>
+                <li>No se vende ni se cede información a terceros con fines comerciales.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="policy">
+        <h2>Datos que entregas al contactarnos</h2>
+        <div class="policy-body">
+            <p>Si escribes por WhatsApp o por correo, se conserva la información que compartas voluntariamente —nombre, empresa, medio de contacto y la descripción del proceso que quieres automatizar— con el único fin de responder tu consulta y preparar una eventual propuesta.</p>
+            <p>WhatsApp es un servicio operado por un tercero y se rige por sus propias condiciones. Si prefieres no usarlo, el correo electrónico está siempre disponible como alternativa.</p>
+        </div>
+    </section>
+
+    <section class="policy">
+        <h2>Documentos que compartes para una evaluación</h2>
+        <div class="policy-body">
+            <div class="note">
+                <p>Si en el marco de un diagnóstico nos envías documentos de tu empresa (facturas, órdenes de compra, formularios u otros):</p>
+                <ul>
+                    <li>Se utilizan <strong>exclusivamente</strong> para evaluar y construir la automatización que solicitaste.</li>
+                    <li><strong>No se comparten con terceros</strong> ni se utilizan para entrenar modelos de inteligencia artificial.</li>
+                    <li>Se eliminan cuando termina la evaluación, o antes si tú lo pides.</li>
+                    <li>Si necesitas un acuerdo de confidencialidad firmado antes de enviar nada, se firma sin costo.</li>
+                </ul>
+                <p>Recomendación práctica: para una primera evaluación suele bastar con documentos de prueba, o con los datos sensibles tachados.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="policy">
+        <h2>Proveedores tecnológicos</h2>
+        <div class="policy-body">
+            <p>El sitio está alojado en la infraestructura de <strong>Cloudflare</strong>, que procesa las solicitudes necesarias para servir las páginas y proteger el servicio. El correo electrónico se gestiona a través de proveedores de correo estándar.</p>
+            <p>Cuando el procesamiento de un documento involucre servicios de inteligencia artificial de terceros, se informará de manera explícita antes de enviarlo, indicando qué servicio se utiliza.</p>
+        </div>
+    </section>
+
+    <section class="policy">
+        <h2>Tus derechos</h2>
+        <div class="policy-body">
+            <p>De acuerdo con la normativa chilena sobre protección de datos personales, puedes solicitar en cualquier momento:</p>
+            <ul>
+                <li>Acceder a los datos que se tengan sobre ti.</li>
+                <li>Rectificarlos si están incorrectos o incompletos.</li>
+                <li>Solicitar su eliminación.</li>
+                <li>Oponerte a su tratamiento.</li>
+            </ul>
+            <p>Basta con escribir a <a href="mailto:hernan@thiers.cl">hernan@thiers.cl</a>. Se responde dentro de un plazo razonable y sin costo.</p>
+        </div>
+    </section>
+
+    <section class="policy">
+        <h2>Cambios en esta página</h2>
+        <div class="policy-body">
+            <p>Si el sitio incorpora nuevas funcionalidades que traten datos de otra forma —por ejemplo, una demostración que permita subir documentos directamente desde el navegador— esta página se actualizará <strong>antes</strong> de que esa funcionalidad esté disponible, y el cambio quedará reflejado en la fecha de actualización.</p>
+        </div>
+    </section>
+
+    <div class="legal">
+        <span>© 2026 Hernán Thiers</span>
+        <a href="/automatizacion-ia/">Automatización con IA</a>
+    </div>
+
+</div>
 
 </body>
 </html>
