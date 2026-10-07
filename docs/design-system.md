@@ -3,10 +3,9 @@
 Referencia visual del sitio. La implementación de referencia es la home,
 [public/index.html](../public/index.html): todo lo que se describe aquí está en su `<style>`.
 
-**Estado:** solo la home usa este sistema. La landing
-([automatizacion-ia/](../public/automatizacion-ia/index.html)), la demo y
-[privacidad/](../public/privacidad/index.html) conservan el estilo anterior (oscuro, Inter) y quedan
-pendientes de migrar.
+**Estado:** la home, [privacidad/](../public/privacidad/index.html) y la
+[landing](../public/automatizacion-ia/index.html) usan este sistema. La demo conserva el estilo
+anterior (oscuro, Inter) y queda pendiente de migrar.
 
 ---
 

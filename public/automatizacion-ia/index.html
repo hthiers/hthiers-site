@@ -46,137 +46,126 @@
       }
     }
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* Design system del sitio: ver docs/design-system.md */
+        :root {
+            --bg: #faf8f3;
+            --surface: #f0ede4;
+            --ink: #1b1a17;
+            --ink-2: #57544c;
+            --ink-3: #8c887d;
+            --line: #e2ded3;
+            --accent: #2f5d50;
+            --tint-1: #e4e9e1;
+            --tint-2: #ece4d6;
+            --serif: 'Newsreader', Georgia, serif;
+            --sans: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #0f172a;
-            color: #f1f5f9;
-            background-image:
-                radial-gradient(ellipse 80% 60% at 10% 0%, #1e3a5f55 0%, transparent 60%),
-                radial-gradient(ellipse 50% 40% at 90% 30%, #1e1b4b40 0%, transparent 50%);
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 17px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
+        a { color: inherit; text-decoration: none; }
+
         .wrap {
-            max-width: 1080px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 40px;
         }
+
+        /* ── Botones ── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 20px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            font-size: 15px;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        .btn-dark { background: var(--ink); color: var(--bg); }
+        .btn-dark:hover { background: var(--accent); }
+        .btn-ghost { border-color: var(--line); }
+        .btn-ghost:hover { border-color: var(--ink); }
+        .btn-light { background: var(--bg); color: var(--ink); }
 
         /* ── Barra superior (fija: el CTA siempre visible) ── */
         .topbar-outer {
             position: sticky;
             top: 0;
             z-index: 50;
-            background: #0f172aee;
+            background: rgba(250, 248, 243, 0.92);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid #1e293b;
+            border-bottom: 1px solid var(--line);
         }
 
         .topbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 24px;
+            height: 68px;
         }
 
-        .back-link {
-            font-size: 9.5pt;
-            color: #64748b;
-            text-decoration: none;
+        .brand {
+            font-family: var(--serif);
+            font-size: 22px;
             font-weight: 500;
+            letter-spacing: -0.01em;
         }
-
-        .back-link:hover { color: #94a3b8; }
-
-        .topbar .btn-whatsapp-small {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: #1e293b;
-            border: 1px solid #334155;
-            color: #f1f5f9;
-            border-radius: 8px;
-            font-size: 9.5pt;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .topbar .btn-whatsapp-small:hover { border-color: #25d366; }
 
         /* ── Hero ── */
         .hero {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
-            gap: 48px;
+            gap: 64px;
             align-items: center;
-            padding: 48px 0 80px;
+            padding: 112px 0 64px;
         }
 
         .hero h1 {
-            font-size: 34pt;
-            font-weight: 800;
-            letter-spacing: -1px;
-            line-height: 1.15;
-            color: #f1f5f9;
-            margin-bottom: 20px;
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(44px, 5.4vw, 72px);
+            line-height: 1.04;
+            letter-spacing: -0.025em;
+            margin-bottom: 28px;
         }
 
         .hero .sub {
-            font-size: 13pt;
-            line-height: 1.6;
-            color: #94a3b8;
-            max-width: 520px;
-            margin-bottom: 32px;
+            font-size: 19px;
+            color: var(--ink-2);
+            max-width: 46ch;
+            margin-bottom: 36px;
         }
 
         .cta-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 14px;
-            margin-bottom: 18px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 26px;
-            border-radius: 10px;
-            font-size: 11pt;
-            font-weight: 700;
-            text-decoration: none;
-            background: #25d366;
-            color: #06210f;
-            transition: opacity 0.2s, transform 0.15s;
-        }
-
-        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
-
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 24px;
-            border-radius: 10px;
-            font-size: 11pt;
-            font-weight: 600;
-            text-decoration: none;
-            background: transparent;
-            color: #f1f5f9;
-            border: 1px solid #334155;
-        }
-
-        .btn-secondary:hover { border-color: #38bdf8; color: #38bdf8; }
 
         .hero .support {
-            font-size: 9.5pt;
-            color: #64748b;
-            max-width: 460px;
-            line-height: 1.6;
+            font-size: 15px;
+            color: var(--ink-3);
+            max-width: 46ch;
         }
 
         /* ── Diagrama del flujo (hero) ── */
@@ -184,11 +173,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0;
-            background: #1e293b40;
-            border: 1px solid #1e293b;
-            border-radius: 16px;
-            padding: 36px 24px;
+            background: var(--tint-1);
+            border-radius: 20px;
+            padding: 48px 32px;
         }
 
         .flow-step {
@@ -196,129 +183,112 @@
             align-items: center;
             gap: 14px;
             width: 100%;
-            max-width: 260px;
-            padding: 14px 18px;
-            background: #1e293b80;
-            border: 1px solid #334155;
-            border-radius: 10px;
-            font-size: 10pt;
-            font-weight: 600;
-            color: #f1f5f9;
+            max-width: 300px;
+            padding: 14px 20px;
+            background: var(--bg);
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
         }
 
         .flow-step .dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #38bdf8;
+            background: var(--ink-3);
             flex-shrink: 0;
         }
 
+        .flow-step:nth-child(3) .dot { background: var(--accent); }
+
         .flow-arrow {
-            color: #334155;
-            font-size: 14pt;
+            color: var(--ink-3);
+            font-size: 18px;
             line-height: 1;
-            padding: 6px 0;
+            padding: 8px 0;
         }
 
-        /* Cascada: el resalte recorre cada recuadro y flecha en secuencia, en loop */
-        .flow-step {
-            animation: flowStepPulse 3.6s ease-in-out infinite;
-        }
-
-        .flow-step .dot {
-            animation: flowDotPulse 3.6s ease-in-out infinite;
-        }
-
-        .flow-arrow {
-            animation: flowArrowPulse 3.6s ease-in-out infinite;
-        }
-
-        @keyframes flowStepPulse {
-            0%, 20%, 100% { border-color: #334155; background: #1e293b80; }
-            8% { border-color: #38bdf860; background: #38bdf815; }
-        }
-
-        @keyframes flowDotPulse {
-            0%, 20%, 100% { background: #38bdf8; box-shadow: none; }
-            8% { background: #38bdf8; box-shadow: 0 0 8px #38bdf8; }
-        }
-
-        @keyframes flowArrowPulse {
-            0%, 20%, 100% { color: #334155; }
-            8% { color: #38bdf8; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .flow-step, .flow-step .dot, .flow-arrow { animation: none; }
-        }
-
-        /* ── Secciones ── */
+        /* ── Secciones: etiqueta arriba, título a la izquierda, bajada a la derecha ── */
         .section {
-            padding: 64px 0;
-            border-top: 1px solid #1e293b;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 64px;
+            align-items: end;
+            padding-top: 128px;
         }
+
+        .section > * { grid-column: 1 / -1; }
+        .section > h2 { grid-column: 1; }
+        .section > .lead { grid-column: 2; }
 
         .section-label {
-            font-size: 9pt;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #38bdf8;
-            margin-bottom: 14px;
-        }
-
-        .section h2 {
-            font-size: 22pt;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: #f1f5f9;
-            max-width: 700px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--accent);
             margin-bottom: 16px;
         }
 
-        .section .lead {
-            font-size: 11.5pt;
-            line-height: 1.7;
-            color: #94a3b8;
-            max-width: 640px;
-            margin-bottom: 36px;
+        h2 {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(32px, 4vw, 52px);
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+            margin-bottom: 48px;
         }
 
-        /* Grid de tarjetas (problema) */
+        .section > h2:not(:has(+ .lead)) { grid-column: 1 / -1; max-width: 20ch; }
+
+        .section .lead {
+            font-size: 17px;
+            color: var(--ink-2);
+            max-width: 46ch;
+            margin-bottom: 48px;
+        }
+
+        /* Columnas de texto sobre un borde superior (problema, alcance) */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
+            gap: 40px 32px;
         }
 
+        .cards-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
         .problem-card {
-            background: #1e293b60;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 22px;
+            border-top: 1px solid var(--line);
+            padding-top: 24px;
         }
 
         .problem-card h3 {
-            font-size: 10.5pt;
-            font-weight: 700;
-            color: #f1f5f9;
-            margin-bottom: 8px;
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            margin-bottom: 10px;
         }
 
         .problem-card p {
-            font-size: 9.5pt;
-            line-height: 1.6;
-            color: #64748b;
+            font-size: 15px;
+            color: var(--ink-2);
+            max-width: 40ch;
         }
 
-        .cards-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-        .cards-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+        .auto-card ul { list-style: none; }
 
-        /* ── Solución: flujo horizontal de 5 pasos ── */
+        .auto-card li {
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--ink-2);
+            padding: 4px 0;
+        }
+
+        /* ── Solución: flujo horizontal ── */
         .solution-flow {
             display: flex;
-            align-items: center;
+            align-items: stretch;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 8px;
@@ -326,69 +296,38 @@
 
         .solution-flow .node {
             flex: 1 1 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 18px 12px;
-            background: #1e293b60;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            font-size: 9.5pt;
-            font-weight: 600;
-            color: #f1f5f9;
+            padding: 24px 14px;
+            background: var(--surface);
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 500;
         }
 
         .solution-flow .arrow {
-            color: #334155;
-            font-size: 14pt;
+            display: flex;
+            align-items: center;
+            color: var(--ink-3);
+            font-size: 18px;
             flex-shrink: 0;
         }
 
         .solution-flow .node.ai {
-            border-color: #38bdf8;
-            background: #38bdf815;
-            color: #38bdf8;
-            animation: aiNodeGlow 2.2s ease-in-out infinite;
-        }
-
-        @keyframes aiNodeGlow {
-            0%, 100% { box-shadow: 0 0 0 0 #38bdf850; }
-            50% { box-shadow: 0 0 0 6px #38bdf800; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .solution-flow .node.ai { animation: none; }
+            background: var(--tint-1);
+            color: var(--accent);
+            font-weight: 600;
         }
 
         .solution-highlight {
-            margin-top: 28px;
-            font-size: 11.5pt;
-            font-weight: 700;
-            color: #f1f5f9;
-            max-width: 640px;
-            line-height: 1.6;
-        }
-
-        /* ── Qué podemos automatizar ── */
-        .auto-card h3 {
-            font-size: 10.5pt;
-            font-weight: 700;
-            color: #38bdf8;
-            margin-bottom: 12px;
-        }
-
-        .auto-card ul {
-            list-style: none;
-        }
-
-        .auto-card li {
-            font-size: 9.5pt;
-            line-height: 1.9;
-            color: #94a3b8;
-        }
-
-        .auto-card li::before {
-            content: '—';
-            color: #334155;
-            margin-right: 8px;
+            margin-top: 40px;
+            font-family: var(--serif);
+            font-size: 28px;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            max-width: 32ch;
         }
 
         /* ── Integraciones ── */
@@ -401,114 +340,76 @@
 
         .integration-tag {
             padding: 8px 16px;
-            background: #1e293b60;
-            border: 1px solid #1e293b;
-            border-radius: 8px;
-            font-size: 9.5pt;
-            color: #94a3b8;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-size: 15px;
+            color: var(--ink-2);
         }
 
         .highlight-box {
-            padding: 28px 32px;
-            background: #38bdf80d;
-            border: 1px solid #38bdf830;
-            border-radius: 14px;
-            font-size: 13pt;
-            font-weight: 700;
-            color: #f1f5f9;
-            line-height: 1.5;
+            padding: 48px;
+            background: var(--tint-1);
+            border-radius: 20px;
+            font-family: var(--serif);
+            font-size: clamp(24px, 2.6vw, 34px);
+            line-height: 1.2;
+            letter-spacing: -0.015em;
         }
 
-        /* ── Cómo funciona (pasos numerados) ── */
+        /* ── Cómo funciona ── */
         .steps {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 32px 24px;
         }
 
         .step {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-            position: relative;
-        }
-
-        .step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            left: 15px;
-            top: 36px;
-            bottom: -16px;
-            width: 1px;
-            background: #1e293b;
+            border-top: 1px solid var(--line);
+            padding-top: 20px;
         }
 
         .step-num {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: #1e293b;
-            border: 1px solid #334155;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 9pt;
-            font-weight: 700;
-            color: #38bdf8;
-            flex-shrink: 0;
-            position: relative;
-            z-index: 1;
+            font-size: 15px;
+            color: var(--ink-3);
+            margin-bottom: 12px;
         }
 
-        .step-body { padding-bottom: 32px; }
-
         .step-body h3 {
-            font-size: 11pt;
-            font-weight: 700;
-            color: #f1f5f9;
-            margin-bottom: 4px;
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
         }
 
         .step-body p {
-            font-size: 9.5pt;
-            line-height: 1.6;
-            color: #64748b;
+            font-size: 15px;
+            color: var(--ink-2);
         }
 
-        /* ── Experiencia técnica ── */
+        /* ── Experiencia ── */
         .experience-box {
-            display: flex;
-            gap: 24px;
-            align-items: flex-start;
-            padding: 28px;
-            background: #1e293b40;
-            border: 1px solid #1e293b;
-            border-radius: 14px;
-        }
-
-        .experience-box .avatar {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #38bdf8, #818cf8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: 800;
-            color: #0f172a;
-            flex-shrink: 0;
+            padding: 56px;
+            background: var(--surface);
+            border-radius: 20px;
         }
 
         .experience-box p {
-            font-size: 10.5pt;
-            line-height: 1.7;
-            color: #94a3b8;
+            font-size: 19px;
+            color: var(--ink-2);
+            max-width: 56ch;
         }
 
         .experience-box .quote {
-            margin-top: 14px;
-            font-weight: 700;
-            color: #f1f5f9;
+            margin-top: 28px;
+            font-family: var(--serif);
+            font-size: clamp(24px, 2.6vw, 32px);
+            line-height: 1.2;
+            letter-spacing: -0.015em;
+            color: var(--ink);
+            max-width: 32ch;
         }
 
         /* ── Antes / Después ── */
@@ -521,176 +422,125 @@
         .ba-col {
             display: flex;
             flex-direction: column;
-            padding: 24px 22px;
-            background: #1e293b60;
-            border: 1px solid #1e293b;
-            border-radius: 14px;
+            padding: 40px;
+            background: var(--surface);
+            border-radius: 20px;
         }
 
-        .ba-col.after {
-            border-color: #38bdf860;
-            background: #38bdf80d;
-        }
+        .ba-col.after { background: var(--tint-1); }
 
         .ba-head {
-            font-size: 9pt;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #64748b;
-            margin-bottom: 4px;
+            font-family: var(--serif);
+            font-size: 30px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
         }
 
-        .ba-col.after .ba-head { color: #38bdf8; }
-
         .ba-sub {
-            font-size: 9.5pt;
-            color: #64748b;
-            margin-bottom: 20px;
+            font-size: 15px;
+            color: var(--ink-2);
+            margin-bottom: 24px;
         }
 
         .ba-list { list-style: none; }
 
         .ba-list li {
             position: relative;
-            padding: 7px 0 7px 26px;
-            font-size: 10pt;
+            padding: 7px 0 7px 22px;
+            font-size: 15px;
             line-height: 1.45;
-            color: #94a3b8;
         }
 
         .ba-list li::before {
             content: '';
             position: absolute;
-            left: 5px;
+            left: 3px;
             top: 15px;
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: #334155;
+            background: var(--ink-3);
         }
 
-        .ba-col.after .ba-list li { color: #f1f5f9; }
-        .ba-col.after .ba-list li::before { background: #38bdf8; }
+        .ba-col.after .ba-list li::before { background: var(--accent); }
 
-        /* La línea que une los pasos hace visible el largo de cada columna */
-        .ba-list li:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            left: 7.5px;
-            top: 21px;
-            bottom: -7px;
-            width: 1px;
-            background: #1e293b;
-        }
+        .ba-list li.manual { color: var(--ink-2); }
 
-        .ba-col.after .ba-list li:not(:last-child)::after { background: #38bdf830; }
-
-        .ba-list li.manual { color: #64748b; }
-
-        /* Debe ganar a `.ba-col.after .ba-list li`, de mayor especificidad */
         .ba-col.after .ba-list li.review {
-            color: #38bdf8;
-            font-weight: 700;
+            color: var(--accent);
+            font-weight: 600;
         }
 
         .ba-foot {
             margin-top: auto;
-            padding-top: 20px;
-            font-size: 9pt;
-            color: #475569;
-            font-style: italic;
+            padding-top: 24px;
+            font-size: 14px;
+            color: var(--ink-3);
         }
 
         .ba-quote {
-            margin-top: 28px;
-            font-size: 11.5pt;
-            font-weight: 700;
-            color: #f1f5f9;
-            max-width: 640px;
-            line-height: 1.6;
+            margin-top: 40px;
+            font-family: var(--serif);
+            font-size: 28px;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            max-width: 32ch;
         }
 
         /* ── Demo (teaser: la demo completa vive en /automatizacion-ia/demo/) ── */
         .demo-teaser {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 32px;
+            gap: 64px;
             align-items: center;
         }
 
-        .demo-teaser .lead { margin-bottom: 24px; }
+        .demo-teaser h2 { margin-bottom: 24px; }
+        .demo-teaser .lead { margin-bottom: 32px; }
 
         .demo-teaser .note {
-            margin-top: 14px;
-            font-size: 9pt;
-            color: #64748b;
-            line-height: 1.6;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--ink-3);
+            max-width: 46ch;
         }
 
         .demo-card {
-            padding: 22px;
-            background: #1e293b60;
-            border: 1px solid #1e293b;
-            border-radius: 14px;
+            padding: 36px;
+            background: var(--tint-1);
+            border-radius: 20px;
         }
 
         .demo-card-head {
-            font-size: 9pt;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #64748b;
-            margin-bottom: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--accent);
+            margin-bottom: 8px;
         }
 
         .demo-card-title {
-            font-size: 11pt;
-            font-weight: 700;
-            color: #f1f5f9;
-            margin-bottom: 14px;
+            font-family: var(--serif);
+            font-size: 24px;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin-bottom: 20px;
         }
 
         .demo-card ul { list-style: none; }
 
         .demo-card li {
             display: flex;
-            gap: 10px;
-            padding: 8px 0;
-            border-top: 1px solid #1e293b;
-            font-size: 10pt;
+            gap: 12px;
+            padding: 12px 0;
+            border-top: 1px solid rgba(27, 26, 23, 0.12);
+            font-size: 15px;
             line-height: 1.45;
-            color: #cbd5e1;
         }
 
-        .demo-card li .ok { color: #38bdf8; font-weight: 700; }
-
-        .demo-card li.review { color: #fbbf24; font-weight: 600; }
-        .demo-card li.review .ok { color: #f59e0b; }
-
-        /* ── Primeros casos (prueba social honesta) ── */
-        .early-box {
-            padding: 32px;
-            background: #38bdf80d;
-            border: 1px solid #38bdf830;
-            border-radius: 14px;
-        }
-
-        .early-box h3 {
-            font-size: 15pt;
-            font-weight: 800;
-            color: #f1f5f9;
-            margin-bottom: 12px;
-            letter-spacing: -0.3px;
-        }
-
-        .early-box p {
-            font-size: 10.5pt;
-            line-height: 1.7;
-            color: #94a3b8;
-            max-width: 620px;
-            margin-bottom: 24px;
-        }
+        .demo-card li .ok { color: var(--accent); font-weight: 600; }
+        .demo-card li.review { font-weight: 600; }
 
         /* ── Precios ── */
         .pricing-grid {
@@ -702,100 +552,103 @@
         .price-card {
             display: flex;
             flex-direction: column;
-            padding: 24px 20px;
-            background: #1e293b60;
-            border: 1px solid #1e293b;
-            border-radius: 14px;
+            padding: 32px 28px;
+            background: var(--surface);
+            border-radius: 16px;
         }
 
-        .price-card.featured {
-            border-color: #38bdf860;
-            background: #38bdf80d;
-        }
+        .price-card.featured { background: var(--tint-1); }
 
         .price-card h3 {
-            font-size: 10pt;
-            font-weight: 700;
-            color: #f1f5f9;
-            margin-bottom: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--ink-3);
+            margin-bottom: 8px;
         }
 
         .price-card .price {
-            font-size: 15pt;
-            font-weight: 800;
-            color: #38bdf8;
-            margin-bottom: 16px;
+            font-family: var(--serif);
+            font-size: 32px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
         }
 
         .price-card ul {
             list-style: none;
             flex: 1;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .price-card li {
-            font-size: 9pt;
-            line-height: 1.9;
-            color: #94a3b8;
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--ink-2);
+            padding: 4px 0 4px 20px;
+            position: relative;
         }
 
         .price-card li::before {
             content: '✓';
-            color: #38bdf8;
-            margin-right: 8px;
+            position: absolute;
+            left: 0;
+            color: var(--accent);
         }
 
         .price-card .btn-price {
             display: block;
             text-align: center;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 9.5pt;
-            font-weight: 700;
-            text-decoration: none;
-            background: #1e293b;
-            color: #f1f5f9;
-            border: 1px solid #334155;
+            padding: 11px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            font-size: 15px;
+            font-weight: 500;
+            transition: background 0.2s, border-color 0.2s;
         }
+
+        .price-card .btn-price:hover { border-color: var(--ink); }
 
         .price-card.featured .btn-price {
-            background: #25d366;
-            color: #06210f;
-            border: none;
+            background: var(--ink);
+            border-color: var(--ink);
+            color: var(--bg);
         }
 
-        .price-card .btn-price:hover { opacity: 0.85; }
+        .price-card.featured .btn-price:hover { background: var(--accent); border-color: var(--accent); }
 
         .price-card .offer {
-            padding: 10px 12px;
-            margin-bottom: 14px;
-            background: #38bdf815;
-            border: 1px dashed #38bdf850;
-            border-radius: 8px;
-            font-size: 9pt;
+            padding: 12px 14px;
+            margin-bottom: 20px;
+            border: 1px dashed var(--accent);
+            border-radius: 12px;
+            font-size: 14px;
             line-height: 1.5;
-            color: #38bdf8;
-            font-weight: 600;
+            color: var(--accent);
+            font-weight: 500;
         }
 
         .pricing-note {
-            margin-top: 20px;
-            font-size: 9pt;
-            color: #64748b;
-            font-style: italic;
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--ink-3);
         }
 
         /* ── FAQ ── */
+        .faq-list { max-width: 820px; }
+
         .faq-item {
-            border-bottom: 1px solid #1e293b;
-            padding: 18px 0;
+            border-top: 1px solid var(--line);
+            padding: 22px 0;
         }
+
+        .faq-item:last-child { border-bottom: 1px solid var(--line); }
 
         .faq-item summary {
             cursor: pointer;
-            font-size: 11pt;
-            font-weight: 700;
-            color: #f1f5f9;
+            font-family: var(--serif);
+            font-size: 24px;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
             list-style: none;
             display: flex;
             justify-content: space-between;
@@ -806,70 +659,85 @@
 
         .faq-item summary::after {
             content: '+';
-            color: #38bdf8;
-            font-size: 16pt;
-            font-weight: 400;
-            margin-left: 16px;
+            font-family: var(--sans);
+            color: var(--ink-3);
+            font-size: 24px;
+            margin-left: 24px;
             flex-shrink: 0;
         }
 
         .faq-item[open] summary::after { content: '−'; }
 
         .faq-item p {
-            margin-top: 12px;
-            font-size: 10pt;
-            line-height: 1.7;
-            color: #94a3b8;
-            max-width: 700px;
+            margin-top: 14px;
+            font-size: 16px;
+            color: var(--ink-2);
+            max-width: 60ch;
         }
 
         /* ── Cierre ── */
-        .closing {
-            text-align: center;
-            padding: 24px 0 80px;
+        .section.closing {
+            margin-top: 128px;
+            padding: 72px 56px;
+            background: var(--ink);
+            color: var(--bg);
+            border-radius: 24px;
+            row-gap: 0;
         }
 
-        .closing h2 {
-            font-size: 24pt;
-            max-width: 700px;
-            margin: 0 auto 16px;
-        }
+        .closing .section-label { color: #bdb9ae; }
+        .closing h2 { margin-bottom: 0; }
 
         .closing .lead {
-            margin: 0 auto 32px;
+            color: #bdb9ae;
+            margin-bottom: 32px;
         }
 
-        .closing .cta-row { justify-content: center; }
+        .closing .cta-row { grid-column: 2; margin-bottom: 0; }
+        .closing .btn-ghost { border-color: #4a4842; color: var(--bg); }
+        .closing .btn-ghost:hover { border-color: var(--bg); }
 
-        .footer-note {
-            text-align: center;
-            padding-bottom: 40px;
-            font-size: 9pt;
-            color: #475569;
+        /* ── Pie ── */
+        .legal {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 96px;
+            border-top: 1px solid var(--line);
+            padding: 24px 0 40px;
+            font-size: 13px;
+            color: var(--ink-3);
         }
 
-        .footer-note a {
-            color: #64748b;
-            text-decoration: none;
-            border-bottom: 1px solid #1e293b;
-        }
+        .legal a:hover { color: var(--ink); }
 
-        .footer-note a:hover { color: #94a3b8; }
-
-        @media (max-width: 780px) {
-            .hero { grid-template-columns: 1fr; padding-top: 24px; }
-            .hero h1 { font-size: 26pt; }
-            .cards-grid, .cards-grid.cols-2, .cards-grid.cols-4 { grid-template-columns: 1fr; }
-            .solution-flow { flex-direction: column; }
-            .solution-flow .arrow { transform: rotate(90deg); }
+        @media (max-width: 960px) {
+            .cards-grid.cols-4 { grid-template-columns: 1fr 1fr; }
             .pricing-grid { grid-template-columns: 1fr 1fr; }
-            .experience-box { flex-direction: column; }
-            .ba-grid { grid-template-columns: 1fr; }
-            .demo-teaser { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: repeat(3, 1fr); }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 760px) {
+            .wrap { padding: 0 16px; }
+            .hero { grid-template-columns: 1fr; gap: 40px; padding: 64px 0 24px; }
+            .flow-diagram { padding: 32px 20px; }
+            .section { grid-template-columns: 1fr; padding-top: 88px; }
+            .section > h2, .section > .lead, .closing .cta-row { grid-column: 1 / -1; }
+            h2 { margin-bottom: 24px; }
+            .section .lead { margin-bottom: 36px; }
+            .cards-grid, .cards-grid.cols-4 { grid-template-columns: 1fr; gap: 28px; }
+            .solution-flow { flex-direction: column; }
+            .solution-flow .arrow { transform: rotate(90deg); justify-content: center; }
+            .steps { grid-template-columns: 1fr 1fr; }
+            .experience-box, .highlight-box { padding: 32px 24px; }
+            .ba-grid, .demo-teaser { grid-template-columns: 1fr; }
+            .demo-teaser { gap: 40px; }
+            .ba-col { padding: 28px 24px; }
+            .demo-card { padding: 28px 22px; }
             .pricing-grid { grid-template-columns: 1fr; }
+            .faq-item summary { font-size: 21px; }
+            .section.closing { margin-top: 88px; padding: 48px 24px; border-radius: 18px; }
+            .legal { flex-direction: column; gap: 6px; margin-top: 64px; }
         }
     </style>
 </head>
@@ -877,8 +745,8 @@
 
     <div class="topbar-outer">
         <div class="wrap topbar">
-            <a href="/" class="back-link">← Hernán Thiers</a>
-            <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso%20%28ref%3A%20topbar%29" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-small" data-ev="cta_whatsapp" data-ev-loc="topbar">
+            <a href="/" class="brand">Hernán Thiers</a>
+            <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso%20%28ref%3A%20topbar%29" target="_blank" rel="noopener noreferrer" class="btn btn-dark" data-ev="cta_whatsapp" data-ev-loc="topbar">
                 Hablar por WhatsApp
             </a>
         </div>
@@ -893,23 +761,23 @@
                 <p class="sub">Reduce el trabajo manual de tu equipo. Procesamos documentos, extraemos información y conectamos tus procesos con los sistemas que ya utilizas.</p>
 
                 <div class="cta-row">
-                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso%20%28ref%3A%20hero%29" target="_blank" rel="noopener noreferrer" class="btn-primary" data-ev="cta_whatsapp" data-ev-loc="hero">
+                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso%20%28ref%3A%20hero%29" target="_blank" rel="noopener noreferrer" class="btn btn-dark" data-ev="cta_whatsapp" data-ev-loc="hero">
                         Solicita un diagnóstico gratuito
                     </a>
-                    <a href="#demo" class="btn-secondary" data-ev="ver_como_funciona" data-ev-loc="hero">Ver cómo funciona</a>
+                    <a href="#demo" class="btn btn-ghost" data-ev="ver_como_funciona" data-ev-loc="hero">Ver cómo funciona</a>
                 </div>
 
                 <p class="support">Analizamos uno de tus procesos actuales y te mostramos qué partes pueden automatizarse, cuánto trabajo puedes ahorrar y qué solución necesitas.</p>
             </div>
 
             <div class="flow-diagram">
-                <div class="flow-step" style="animation-delay:0s"><span class="dot" style="animation-delay:0s"></span> PDF / Correo</div>
-                <div class="flow-arrow" style="animation-delay:0.45s">↓</div>
-                <div class="flow-step" style="animation-delay:0.9s"><span class="dot" style="animation-delay:0.9s"></span> IA extrae la información</div>
-                <div class="flow-arrow" style="animation-delay:1.35s">↓</div>
-                <div class="flow-step" style="animation-delay:1.8s"><span class="dot" style="animation-delay:1.8s"></span> Validación</div>
-                <div class="flow-arrow" style="animation-delay:2.25s">↓</div>
-                <div class="flow-step" style="animation-delay:2.7s"><span class="dot" style="animation-delay:2.7s"></span> Sistema / Excel / ERP</div>
+                <div class="flow-step"><span class="dot"></span> PDF / Correo</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step"><span class="dot"></span> IA extrae la información</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step"><span class="dot"></span> Validación</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step"><span class="dot"></span> Sistema / Excel / ERP</div>
             </div>
         </div>
 
@@ -1017,7 +885,7 @@
                 <div>
                     <h2>Míralo funcionando</h2>
                     <p class="lead">Elige un documento de ejemplo y mira cómo se lee, cómo el software valida cada dato y cómo queda listo para tu sistema. También verás qué pasa cuando algo no cuadra.</p>
-                    <a href="/automatizacion-ia/demo/" class="btn-secondary" data-ev="ver_demo" data-ev-loc="landing_demo">Ver la demo →</a>
+                    <a href="/automatizacion-ia/demo/" class="btn btn-ghost" data-ev="ver_demo" data-ev-loc="landing_demo">Ver la demo →</a>
                     <p class="note">Usa documentos de ejemplo. Con tus documentos, los campos y las reglas se adaptan a tu proceso.</p>
                 </div>
                 <div class="demo-card" aria-hidden="true">
@@ -1112,35 +980,35 @@
 
             <div class="steps">
                 <div class="step">
-                    <div class="step-num">1</div>
+                    <div class="step-num">01</div>
                     <div class="step-body">
                         <h3>Analizamos</h3>
                         <p>Revisamos cómo funciona actualmente el proceso.</p>
                     </div>
                 </div>
                 <div class="step">
-                    <div class="step-num">2</div>
+                    <div class="step-num">02</div>
                     <div class="step-body">
                         <h3>Identificamos</h3>
                         <p>Detectamos qué tareas pueden automatizarse y qué información debe procesarse.</p>
                     </div>
                 </div>
                 <div class="step">
-                    <div class="step-num">3</div>
+                    <div class="step-num">03</div>
                     <div class="step-body">
                         <h3>Diseñamos</h3>
                         <p>Definimos una solución utilizando IA, APIs y software a medida.</p>
                     </div>
                 </div>
                 <div class="step">
-                    <div class="step-num">4</div>
+                    <div class="step-num">04</div>
                     <div class="step-body">
                         <h3>Implementamos</h3>
                         <p>Construimos e integramos la automatización con tus sistemas.</p>
                     </div>
                 </div>
                 <div class="step">
-                    <div class="step-num">5</div>
+                    <div class="step-num">05</div>
                     <div class="step-body">
                         <h3>Acompañamos</h3>
                         <p>Mantenemos y mejoramos la solución después de su implementación.</p>
@@ -1155,23 +1023,10 @@
             <h2>Trayectoria como consultor y desarrollo de sistemas a nivel Internacional</h2>
 
             <div class="experience-box">
-                <div class="avatar">HT</div>
                 <div>
                     <p>Soy ingeniero informático con más de 15 años de experiencia en desarrollo de software, integración de sistemas, APIs, bases de datos y automatización, trabajando con clientes en Chile y en el extranjero.</p>
                     <p class="quote">La IA acelera el desarrollo. La experiencia permite construir una solución que realmente funcione en producción.</p>
                 </div>
-            </div>
-        </div>
-
-        <!-- ── Primeros casos ── -->
-        <div class="section">
-            <p class="section-label">Etapa actual</p>
-            <div class="early-box">
-                <h3>¿Quieres ser uno de nuestros primeros casos?</h3>
-                <p>Estamos seleccionando un número acotado de empresas para implementar automatizaciones concretas. A cambio de autorización para publicar el resultado como caso de estudio, el precio de la primera implementación es preferente.</p>
-                <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20postular%20mi%20proceso%20como%20uno%20de%20los%20primeros%20casos%20%28ref%3A%20primeros-casos%29" target="_blank" rel="noopener noreferrer" class="btn-primary" data-ev="cta_whatsapp" data-ev-loc="primeros_casos">
-                    Quiero postular mi proceso
-                </a>
             </div>
         </div>
 
@@ -1220,7 +1075,7 @@
                     <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20evaluar%20mi%20proceso%20para%20una%20automatizaci%C3%B3n%20integrada%20%28ref%3A%20precio-integrada%29" target="_blank" rel="noopener noreferrer" class="btn-price" data-ev="cta_whatsapp" data-ev-loc="precio_integrada">Evaluar mi proceso</a>
                 </div>
                 <div class="price-card">
-                    <h3>Mantención</h3>
+                    <h3>Monitoreo y Soporte</h3>
                     <div class="price">Desde $180.000/mes</div>
                     <ul>
                         <li>Soporte y correcciones</li>
@@ -1228,7 +1083,7 @@
                         <li>Monitoreo</li>
                         <li>Mantenimiento de integraciones</li>
                     </ul>
-                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20consultar%20por%20soporte%20y%20mantenci%C3%B3n%20%28ref%3A%20precio-mantencion%29" target="_blank" rel="noopener noreferrer" class="btn-price" data-ev="cta_whatsapp" data-ev-loc="precio_mantencion">Consultar soporte</a>
+                    <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20consultar%20por%20monitoreo%20y%20soporte%20%28ref%3A%20precio-mantencion%29" target="_blank" rel="noopener noreferrer" class="btn-price" data-ev="cta_whatsapp" data-ev-loc="precio_mantencion">Consultar soporte</a>
                 </div>
             </div>
 
@@ -1282,20 +1137,22 @@
 
         <!-- ── Cierre + CTA final ── -->
         <div class="section closing">
-            <p class="section-label" style="text-align:center;">¿Vamos a hablar de tu proceso?</p>
+            <p class="section-label">¿Vamos a hablar de tu proceso?</p>
             <h2>¿Qué proceso estás haciendo manualmente hoy?</h2>
             <p class="lead">Cuéntanos cómo funciona. Analizamos el proceso y te mostramos qué parte puede automatizarse, qué tecnología necesitamos y cuánto podría costar.</p>
 
             <div class="cta-row">
-                <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso%20%28ref%3A%20cierre%29" target="_blank" rel="noopener noreferrer" class="btn-primary" data-ev="cta_whatsapp" data-ev-loc="cierre">
+                <a href="https://wa.me/56993779421?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20gratuito%20para%20automatizar%20un%20proceso%20%28ref%3A%20cierre%29" target="_blank" rel="noopener noreferrer" class="btn btn-light" data-ev="cta_whatsapp" data-ev-loc="cierre">
                     Solicita un diagnóstico gratuito
                 </a>
-                <a href="mailto:hernan@thiers.cl" class="btn-secondary" data-ev="cta_email" data-ev-loc="cierre">Escribir por correo</a>
+                <a href="mailto:hernan@thiers.cl" class="btn btn-ghost" data-ev="cta_email" data-ev-loc="cierre">Escribir por correo</a>
             </div>
         </div>
 
-        <p class="footer-note">Automatización Inteligente de Documentos — un servicio de Thiers.cl Consultoría<br>
-            <a href="/privacidad/">Privacidad y tratamiento de datos</a></p>
+        <div class="legal">
+            <span>Automatización Inteligente de Documentos — un servicio de Thiers.cl Consultoría</span>
+            <a href="/privacidad/">Privacidad y tratamiento de datos</a>
+        </div>
 
     </div>
 
